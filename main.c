@@ -1,12 +1,12 @@
 ///
-/// @file       mouse.c
+/// @file       main.c
 /// @author     Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
 /// @date       2012-02-21
 ///
-/// @brief      Main part of the micro mouse program
+/// @brief      Main part of the micromouse program
 ///
 /// @remarks    This program is based on Dr Tim Davies' assembly version of
-///             micro mouse program and the C port of it by Mr Gareth Evans.
+///             micromouse program and the C port of it by Mr Gareth Evans.
 ///
 /// @remarks    Copyright (C) 2012 Swansea University. All rights reserved.
 ///

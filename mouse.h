@@ -4,10 +4,10 @@
 /// @date       2012-02-21
 ///
 /// @brief      Declares system-wide types, macros, variables, and functions
-///             for the micro mouse program.
+///             for the micromouse program.
 ///
 /// @remarks    This program is based on Dr Tim Davies' assembly version of
-///             micro mouse program and the C port of it by Mr Gareth Evans.
+///             micromouse program and the C port of it by Mr Gareth Evans.
 ///
 /// @remarks    Copyright (C) 2012 Swansea University. All rights reserved.
 ///
