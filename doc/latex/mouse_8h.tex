@@ -1,0 +1,208 @@
+\hypertarget{mouse_8h}{
+\section{mouse.h \-File \-Reference}
+\label{mouse_8h}\index{mouse.\-h@{mouse.\-h}}
+}
+
+
+\-Declares system-\/wide types, macros, variables, and functions for the micro mouse program.  
+
+
+{\ttfamily \#include $<$hidef.\-h$>$}\*
+{\ttfamily \#include \char`\"{}derivative.\-h\char`\"{}}\*
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}{
+\#define \hyperlink{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}{\-\_\-\-M\-I\-C\-R\-O\-\_\-\-M\-O\-U\-S\-E\-\_\-\-H}}
+\label{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}
+
+\begin{DoxyCompactList}\small\item\em to avoid duplicate inclusion of the same header file \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a77366c1bd428629dc898e188bfd182a3}{
+\#define \hyperlink{mouse_8h_a77366c1bd428629dc898e188bfd182a3}{\-E\-X\-T\-E\-R\-N}~extern}
+\label{mouse_8h_a77366c1bd428629dc898e188bfd182a3}
+
+\begin{DoxyCompactList}\small\item\em for \-Enable\-Interrupts macro include peripheral declarations \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a09dff3d9a89874939fa7cc9d056b114c}{
+\#define \hyperlink{mouse_8h_a09dff3d9a89874939fa7cc9d056b114c}{s1}~0x4444}
+\label{mouse_8h_a09dff3d9a89874939fa7cc9d056b114c}
+
+\begin{DoxyCompactList}\small\item\em \-Motor speed control. \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a3ec77fc652b1787d9ace19f0f8fb6072}{
+\#define {\bfseries s2}~0x2222}
+\label{mouse_8h_a3ec77fc652b1787d9ace19f0f8fb6072}
+
+\item 
+\hypertarget{mouse_8h_a7a51ed112e9b79f89e3e70beb8db8bf5}{
+\#define {\bfseries f}~0x\-F\-F\-F\-F}
+\label{mouse_8h_a7a51ed112e9b79f89e3e70beb8db8bf5}
+
+\end{DoxyCompactItemize}
+\begin{Indent}\paragraph*{\-Touch \-Bar \-Switches}
+{\em \-We assume that \-P\-T\-A\-D2 and \-P\-T\-A\-D1 are connected to front touch bars left and right, respectively }\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_acecaf2a75e78f076f0aa3e7ef64e1d04}{
+\#define {\bfseries touch\-Bar\-Front\-Left}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D2}
+\label{mouse_8h_acecaf2a75e78f076f0aa3e7ef64e1d04}
+
+\item 
+\hypertarget{mouse_8h_af607ec03617ff68c5be4ea582763d116}{
+\#define {\bfseries touch\-Bar\-Front\-Right}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D1}
+\label{mouse_8h_af607ec03617ff68c5be4ea582763d116}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-I\-R sensors}
+{\em \-We assume that \-P\-T\-A\-D7 and \-P\-T\-A\-D6 are connected to front infrared sensors left and right, respectively }\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a0fd4e2f4de6f80efee386a99d789fd8a}{
+\#define {\bfseries infrared\-Front\-Left}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D7}
+\label{mouse_8h_a0fd4e2f4de6f80efee386a99d789fd8a}
+
+\item 
+\hypertarget{mouse_8h_a944d7f3cfeced4d7fc6340733664f252}{
+\#define {\bfseries infrared\-Front\-Right}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D6}
+\label{mouse_8h_a944d7f3cfeced4d7fc6340733664f252}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{\-Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries \-Mouse\-Mode} \{ {\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-R\-E\-A\-D\-Y}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-\_\-\-A\-V\-O\-I\-D\-I\-N\-G}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-L\-I\-N\-E\-\_\-\-F\-O\-L\-L\-O\-W\-I\-N\-G}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-C\-O\-M\-B\-A\-T}
+ \}
+\item 
+enum {\bfseries \-Mouse\-Status} \{ \*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-S\-T\-O\-P}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-L\-E\-F\-T}, 
+\*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-R\-I\-G\-H\-T}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-A\-R\-O\-U\-N\-D}
+ \}
+\item 
+enum {\bfseries \-Mouse\-Action} \{ \*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-S\-T\-O\-P}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-L\-E\-F\-T}, 
+\*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-R\-I\-G\-H\-T}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-A\-R\-O\-U\-N\-D}
+ \}
+\item 
+enum {\bfseries \-Motor} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-L\-E\-F\-T}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-R\-I\-G\-H\-T}
+ \}
+\item 
+enum {\bfseries \-Motor\-Status} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-S\-T\-O\-P}
+ \}
+\item 
+enum {\bfseries \-Motor\-Action} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-S\-T\-O\-P}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{Indent}\paragraph*{\-Functions for mouse}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a3f5f5f4070f943975c26bcc56ab24ea6}{
+void {\bfseries \-Avoid\-Obstacle} ()}
+\label{mouse_8h_a3f5f5f4070f943975c26bcc56ab24ea6}
+
+\item 
+\hypertarget{mouse_8h_abee94d38967e937b7409918da94e0be0}{
+void {\bfseries \-Control\-Mouse} (\-Mouse\-Action action)}
+\label{mouse_8h_abee94d38967e937b7409918da94e0be0}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Functions for motors}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a93e11e781f4e90b648db2943f881435e}{
+void {\bfseries \-Control\-Motor} (\-Motor motor, \-Motor\-Action action)}
+\label{mouse_8h_a93e11e781f4e90b648db2943f881435e}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Interrupt service routines (\-I\-S\-Rs)}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a57f5e36834ee3dc577bac964ef628303}{
+interrupt \*
+\-Vector\-Number\-\_\-\-Vkeyboard1 void {\bfseries int\-S\-W3\-\_\-4} ()}
+\label{mouse_8h_a57f5e36834ee3dc577bac964ef628303}
+
+\item 
+\hypertarget{mouse_8h_a43aefe52ed1c497cd3637dcd86f29174}{
+interrupt \*
+\-Vector\-Number\-\_\-\-Vtpm1ovf void {\bfseries int\-T\-P\-M1\-O\-V\-F} ()}
+\label{mouse_8h_a43aefe52ed1c497cd3637dcd86f29174}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Misc. functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a83da1617930ffda7c997b42aec4680fc}{
+byte {\bfseries \-Bit\-Set} (byte \-Bit\-\_\-position, byte \-Var\-\_\-old)}
+\label{mouse_8h_a83da1617930ffda7c997b42aec4680fc}
+
+\item 
+\hypertarget{mouse_8h_a4725f6c66b6d97b186545599807ded06}{
+byte {\bfseries \-Bit\-Clear} (byte \-Bit\-\_\-position, byte \-Var\-\_\-old)}
+\label{mouse_8h_a4725f6c66b6d97b186545599807ded06}
+
+\item 
+\hypertarget{mouse_8h_acbdea21ceb134901834fa2159d9aaa9f}{
+void {\bfseries \-Delay} (int)}
+\label{mouse_8h_acbdea21ceb134901834fa2159d9aaa9f}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}{
+\-E\-X\-T\-E\-R\-N \-Mouse\-Mode \hyperlink{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}{mouse\-Mode}}
+\label{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}
+
+\begin{DoxyCompactList}\small\item\em operation mode of mouse \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a0a1088091d78a9bb873c762768082372}{
+\-E\-X\-T\-E\-R\-N \-Mouse\-Status \hyperlink{mouse_8h_a0a1088091d78a9bb873c762768082372}{mouse\-Status}}
+\label{mouse_8h_a0a1088091d78a9bb873c762768082372}
+
+\begin{DoxyCompactList}\small\item\em status of mouse \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}{
+\-E\-X\-T\-E\-R\-N \-Motor\-Status \hyperlink{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}{left\-Motor}}
+\label{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}
+
+\begin{DoxyCompactList}\small\item\em status of left motor \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_afe88a6396fd833a44020ac1a6732db83}{
+\-E\-X\-T\-E\-R\-N \-Motor\-Status \hyperlink{mouse_8h_afe88a6396fd833a44020ac1a6732db83}{right\-Motor}}
+\label{mouse_8h_afe88a6396fd833a44020ac1a6732db83}
+
+\begin{DoxyCompactList}\small\item\em status of right motor \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Declares system-\/wide types, macros, variables, and functions for the micro mouse program. \begin{DoxyAuthor}{\-Author}
+\-Kyeong \-Soo (\-Joseph) \-Kim $<$\href{mailto:k.s.kim@swansea.ac.uk}{\tt k.\-s.\-kim@swansea.\-ac.\-uk}$>$ 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+2012-\/02-\/21
+\end{DoxyDate}
+\begin{DoxyRemark}{\-Remarks}
+\-This program is based on \-Dr \-Tim \-Davies' assembly version of micro mouse program and the \-C port of it by \-Mr \-Gareth \-Evans.
+
+\-Copyright (\-C) 2012 \-Swansea \-University. \-All rights reserved.
+
+\-This software is written and distributed under the \-G\-N\-U \-General \-Public \-License \-Version 2 (\href{http://www.gnu.org/licenses/gpl-2.0.html}{\tt http\-://www.\-gnu.\-org/licenses/gpl-\/2.\-0.\-html}). \-You must not remove this notice, or any other, from this software. 
+\end{DoxyRemark}
