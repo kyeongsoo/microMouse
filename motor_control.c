@@ -6,7 +6,7 @@
 /// @brief  Implements functions for motor control.
 ///
 /// @remarks This program is based on Dr Tim Davies' assembly version of
-///          micromouse program and the C port of it by Mr Gareth Evans.
+///          micro mouse program and the C port of it by Mr Gareth Evans.
 ///
 /// @remarks Copyright (C) 2012 Swansea University. All rights reserved.
 ///
@@ -58,8 +58,10 @@ void ControlMotor(Motor motor, MotorAction action)
 // main speed control function called by TPM2 overflow ISR
 void ControlSpeed()
 {
-  if (diffLeft != diffright) {
+    /*
+    if (diffLeft != diffright) {
     
-  }
+    }
+    */
     
 }
