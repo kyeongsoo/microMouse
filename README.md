@@ -1,5 +1,4 @@
-EG-252 Group Design Exercise - Micromouse Sample Code
-=====================================================
+# EG-252 Group Design Exercise - Micromouse Sample Code
 
 * Shortdesc: Micromouse sample code
 * Author: Kyeong Soo (Joseph) Kim (k.s.kim@swansea.ac.uk)
@@ -11,7 +10,7 @@ Design Exercise" at the College of Engineering, Swansea University, in
 Wales, UK.
 
 
-* Features:
+## Features:
 
 
-* Notes:
+## Notes:
