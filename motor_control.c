@@ -1,18 +1,18 @@
 ///
-/// @file   isr.c
-/// @author Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
-/// @date   2012-02-21
+/// @file       motor_control.c
+/// @author     Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
+/// @date       2012-02-21
 ///
-/// @brief  Implements functions for motor control.
+/// @brief      Implements functions for motor control.
 ///
-/// @remarks This program is based on Dr Tim Davies' assembly version of
-///          micro mouse program and the C port of it by Mr Gareth Evans.
+/// @remarks    This program is based on Dr Tim Davies' assembly version of
+///             micro mouse program and the C port of it by Mr Gareth Evans.
 ///
-/// @remarks Copyright (C) 2012 Swansea University. All rights reserved.
+/// @copyright  Copyright (C) 2012 Swansea University. All rights reserved.
 ///
-/// @remarks This software is written and distributed under the GNU General
-///          Public License Version 2 (http://www.gnu.org/licenses/gpl-2.0.html).
-///          You must not remove this notice, or any other, from this software.
+/// @copyright  This software is written and distributed under the GNU General
+///             Public License Version 2 (http://www.gnu.org/licenses/gpl-2.0.html).
+///             You must not remove this notice, or any other, from this software.
 ///
 
 

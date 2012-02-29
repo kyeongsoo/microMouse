@@ -1,15 +1,15 @@
 ///
-/// @file   isr.c
-/// @author Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
-/// @date   2012-02-21
+/// @file       isr.c
+/// @author     Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
+/// @date       2012-02-21
 ///
-/// @brief  Implements interrupt service routines (ISRs).
+/// @brief      Implements interrupt service routines (ISRs).
 ///
-/// @remarks Copyright (C) 2012 Swansea University. All rights reserved.
+/// @copyright  Copyright (C) 2012 Swansea University. All rights reserved.
 ///
-/// @remarks This software is written and distributed under the GNU General
-///          Public License Version 2 (http://www.gnu.org/licenses/gpl-2.0.html).
-///          You must not remove this notice, or any other, from this software.
+/// @copyright  This software is written and distributed under the GNU General
+///             Public License Version 2 (http://www.gnu.org/licenses/gpl-2.0.html).
+///             You must not remove this notice, or any other, from this software.
 ///
 
 

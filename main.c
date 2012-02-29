@@ -1,5 +1,5 @@
 ///
-/// @file       mouse.c
+/// @file       main.c
 /// @author     Kyeong Soo (Joseph) Kim <k.s.kim@swansea.ac.uk>
 /// @date       2012-02-21
 ///

@@ -8,9 +8,9 @@
 /// @remarks    This program is based on Dr Tim Davies' assembly version of
 ///             micro mouse program and the C port of it by Mr Gareth Evans.
 ///
-/// @remarks    Copyright (C) 2012 Swansea University. All rights reserved.
+/// @copyright  Copyright (C) 2012 Swansea University. All rights reserved.
 ///
-/// @remarks    This software is written and distributed under the GNU General
+/// @copyright  This software is written and distributed under the GNU General
 ///             Public License Version 2 (http://www.gnu.org/licenses/gpl-2.0.html).
 ///             You must not remove this notice, or any other, from this software.
 ///
