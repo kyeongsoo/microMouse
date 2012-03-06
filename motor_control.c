@@ -55,13 +55,25 @@ void ControlMotor(Motor motor, MotorAction action)
 }
 
 
-// main speed control function called by TPM2 overflow ISR
+// main speed control function called by TPM2 timer overflow ISR
 void ControlSpeed()
 {
-    /*
-    if (diffLeft != diffright) {
+    int corr;
+    int diff;
+    
+    diff = diffLeft - diffRight;
+    
+    if (diff != 0) {
+        // adjust the speeds of left and right motors based on the difference
+        diff = diff / scaleFactor;
+        pwLeft -= diff;
+        pwRight += diff;
+        
+        // check whether the new values are greater than pwMax or smaller than pwMin
+        
+        // update PWM with new values of pwLeft and pwRight accordingly.
+    
+    
     
     }
-    */
-    
 }

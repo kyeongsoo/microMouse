@@ -112,6 +112,17 @@ EXTERN MouseStatus mouseStatus;	///< status of mouse
 EXTERN MotorStatus leftMotor;   ///< status of left motor
 EXTERN MotorStatus rightMotor;  ///< status of right motor
 
+// Motor speed control
+EXTERN int diffLeft;            ///< difference between two consecutive counter values for left motor
+EXTERN int diffRight;           ///< difference between two consecutive counter values for right motor
+EXTERN int travelDistance;      ///< distance to travel; one unit is approximately 0.5 mm
+EXTERN int scaleFactor;         ///< scale factor used in motor speed control
+EXTERN int nomSpeed;
+EXTERN int pwLeft;
+EXTERN int pwRight;
+EXTERN int pwMax;
+EXTERN int pwMin;
+
 
 //------------------------------------------------------------------------------
 //  Functions
@@ -125,6 +136,7 @@ void ControlMouse(MouseAction action);
 /// @name Functions for motors
 //@{
 void ControlMotor(Motor motor, MotorAction action);
+void ControlSpeed();
 //@}
 
 /// @name Interrupt service routines (ISRs)

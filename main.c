@@ -15,7 +15,68 @@
 ///             You must not remove this notice, or any other, from this software.
 ///
 
-
+///
+/// @mainpage   Sample Programs in C for EG-252 Group Design Exercise - Micromouse
+///
+/// @section    sec_intro Introduction
+///             
+/// This web page provides information on the sample micromouse programs in C
+/// and gives advices on how to install programs and modify them for your own
+/// micromouse.
+///
+/// @section    sec_install Installation
+///
+/// @section    sec_config Configurations
+///
+/// The sample programs have been prepared for a DEMO9S08AW60E demonstration
+/// board for ease of testing and debugging with the following configurations:
+///
+/// @subsection sec_mouse_operation Mouse Operations
+///
+/// Mouse operation mode can be set with the rocker switches 1/2 on the demo
+/// board as follows:
+/// <table>
+/// <tr>
+/// <th>SW1</th>
+/// <th>SW2</th>
+/// <th>Operation Mode</th>
+/// <th>LED8*</th>
+/// <th>LED9*</th>
+/// </tr>
+/// <tr>
+/// <td>Open**</td>
+/// <td>Open</td>
+/// <td>MOUSE_MODE_OBSTACLE_AVOIDING</td>
+/// <td>ON</td>
+/// <td>ON</td>
+/// </tr>
+/// <tr>
+/// <td>Open</td>
+/// <td>Closed</td>
+/// <td>MOUSE_MODE_MODE_LINE_FOLLOWING</td>
+/// <td>ON</td>
+/// <td>OFF</td>
+/// </tr>
+/// <tr>
+/// <td>Closed</td>
+/// <td>Open</td>
+/// <td>MOUSE_MODE_MODE_COMBAT</td>
+/// <td>OFF</td>
+/// <td>ON</td>
+/// </tr>
+/// <tr>
+/// <td>Closed</td>
+/// <td>Closed</td>
+/// <td>Reserved</td>
+/// <td>OFF</td>
+/// <td>OFF</td>
+/// </tr>
+/// </table>
+/// @li *  We assume that PTE0 and PTE1 are connected to LED8 and LED9, respectively.
+/// @li ** These switches are active low and input a logic high when set to the open position.
+///
+/// @subsection sec_motor_control Motor control
+///
 
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
 
@@ -44,11 +105,13 @@ void main(void)
 
     // for motor speed control with timer overflow interrupt of TPM2
     TPM2SC = 0b01001000;    // enable timer overflow interrupt on bus rate clock
-    TPM2MOD = 0x4e20;       // set timer period to 10ms (= 20,000*0.5us)
-/*
+    TPM2MOD = 0x4e20;       // set timer period to 10ms (= 20,000*0.5us(<-2MHz))
     TPM2C0SC = 0b01010000;  // enable interrups on time-out
     TPM2C1SC = 0b01010000;  // enable interrups on time-out
-*/
+    diffLeft = 0;           // difference between two consecutive counter values for left motor
+    diffRight = 0;          // difference between two consecutive counter values for right motor
+    travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
+    scaleFactor = 2;        // scale factor used in motor speed control
 
     // for KBI handling
     PTDPE = 0xFF;   // enable port D pullups for push button switch

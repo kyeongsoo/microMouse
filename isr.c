@@ -57,6 +57,7 @@ interrupt VectorNumber_Vkeyboard1 void intSW3_4()
   KBI1SC_KBACK = 1; // clear KBI interrupt flag
 }
 
+
 // ISR to provide distance feedback to motor control functions
 // based on tacho meter
 interrupt VectorNumber_Vtpm2ovf void intTPM2OVF()
@@ -64,8 +65,8 @@ interrupt VectorNumber_Vtpm2ovf void intTPM2OVF()
     byte tmp;
 
     // clear TPM2 timer overflow flag    
-    tmp = TPM2SC_TOF;   // first, need to read from TPM2 TOF bit
-    TPM2SC_TOF = 0;     // then, clear TPM2 TOF bit
+    tmp = TPM2SC_TOF;   // first, need to read from TPM2 timer overflow flag
+    TPM2SC_TOF = 0;     // then, clear TPM2 timer overflow flag
 
 /*  
     // DEBUG
@@ -77,4 +78,45 @@ interrupt VectorNumber_Vtpm2ovf void intTPM2OVF()
         // balance the speeds of motors when both motors are moving
         ControlSpeed();
     }
+}
+
+
+// ISR to monitor a left motor speed based on tacho meter
+interrupt VectorNumber_Vtpm2ch0 void intTPM2CH0()
+{
+    byte tmp;
+    static int oldLeft = 0;
+
+    // clear TPM2 channel 0 flag    
+    tmp = TPM2C0SC_CH0F;    // first, need to read from TPM2 channel 0 flag bit
+    TPM2C0SC_CH0F = 0;      // then, clear TPM2 channel 0 flag
+    
+    diffLeft = TPM2C0VH - oldLeft;
+    oldLeft = TPM2C0VH;
+    
+    if (travelDistance > 0) {
+        // check travelDistance variable and decrement if it is greater than zero
+        travelDistance--;
+    }
+}
+
+
+// ISR to monitor a right motor speed based on tacho meter
+interrupt VectorNumber_Vtpm2ch1 void intTPM2CH1()
+{
+    byte tmp;
+    static int oldRight = 0;
+
+    // clear TPM2 channel 1 flag    
+    tmp = TPM2C1SC_CH1F;    // first, need to read from TPM2 channel 1 flag bit
+    TPM2C1SC_CH1F = 0;      // then, clear TPM2 channel 1 flag
+    
+    diffRight = TPM2C1VH - oldRight;
+    oldRight = TPM2C1VH;
+    
+    if (travelDistance > 0) {
+        // check travelDistance variable and decrement if it is greater than zero
+        travelDistance--;
+    }
+  
 }
