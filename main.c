@@ -75,7 +75,33 @@
 /// @li *  We assume that PTE0 and PTE1 are connected to LED8 and LED9, respectively.
 /// @li ** These switches are active low and input a logic high when set to the open position.
 ///
-/// @subsection sec_motor_control Motor control
+/// @subsection sec_motor_control Motor Control
+///
+/// @subsection sec_global_constants Global Constans
+///
+/// The following is a summary of important global constants and their default values and descriptions:
+/// <table>
+/// <tr>
+/// <th>Name</th>
+/// <th>Default Value</th>
+/// <th>Description</th>
+/// </tr>
+/// <tr>
+/// <td>pwmPeriod</td>
+/// <td>10</td>
+/// <td>Period of PWM signal in ms</td>
+/// </tr>
+/// <tr>
+/// <td>controlPeriod</td>
+/// <td>50</td>
+/// <td>Period of motor speed control in ms</td>
+/// </tr>
+/// <tr>
+/// <td>defaultSpeed</td>
+/// <td>25</td>
+/// <td>Default speed in terms of percentage duty cycle (e.g., 100% for full speed)</td>
+/// </tr>
+/// </table>
 ///
 
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
@@ -97,7 +123,7 @@ void main(void)
     //--------------------------------------------------------
     // for motor driving with PWM from TPM1
     TPM1SC = 0b00001000;    // edge-aligned PWM on bus rate clock
-    TPM1MOD = 0x8888;       // set PWM period
+    TPM1MOD = word(pwmPeriod * busClock * 1000);    // set PWM period
     TPM1C2SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF0
     TPM1C3SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF1
     TPM1C4SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF2
@@ -105,13 +131,13 @@ void main(void)
 
     // for motor speed control with timer overflow interrupt of TPM2
     TPM2SC = 0b01001000;    // enable timer overflow interrupt on bus rate clock
-    TPM2MOD = 0x4e20;       // set timer period to 10ms (= 20,000*0.5us(<-2MHz))
+    TPM2MOD = word(controlPeriod * busClock * 1000);    // set motor speed control period
     TPM2C0SC = 0b01010000;  // enable interrups on time-out
     TPM2C1SC = 0b01010000;  // enable interrups on time-out
     diffLeft = 0;           // difference between two consecutive counter values for left motor
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
-    scaleFactor = 2;        // scale factor used in motor speed control
+    scaleFactor = 2;        // scale factor used in motor speed control    
 
     // for KBI handling
     PTDPE = 0xFF;   // enable port D pullups for push button switch

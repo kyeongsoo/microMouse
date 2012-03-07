@@ -69,11 +69,20 @@ void ControlSpeed()
         pwLeft -= diff;
         pwRight += diff;
         
-        // check whether the new values are greater than pwMax or smaller than pwMin
-        
-        // update PWM with new values of pwLeft and pwRight accordingly.
-    
-    
-    
+        // if the new value is greater than pwMax or smaller than pwMin, recover the original value from TPM1 channel value register;
+        // otherwise, update the rigster with the new value.
+        if (pwLeft < pwMin || pwLeft > pwMax) {
+            pwLeft = TPM1C2V;
+        }
+        else {
+            TPM1C2V = pwLeft;
+        }
+        if (pwRight < pwMin || pwright > pwMax) {
+            pwRight = TPM1C4V;
+        }
+        else {
+            TPM1C4V = pwRight;
+        }
+
     }
 }

@@ -80,7 +80,7 @@ typedef enum {
 
 
 //------------------------------------------------------------------------------
-//  Macros
+//  Macros and global constants
 //------------------------------------------------------------------------------
 /// @name Touch Bar Switches
 /// We assume that PTAD2 and PTAD1 are connected to front touch
@@ -98,10 +98,16 @@ typedef enum {
 #define infraredFrontRight  PTAD_PTAD6
 //@}
 
+/// System specific
+#define busClock        2   ///< system bus clock in MHz
+
 /// Motor speed control.
 #define s1  0x4444
 #define s2  0x2222
 #define f   0xFFFF
+#define pwmPeriod       10  ///< period of PWM signal in ms
+#define controlPeriod   50  ///< period of motor speed control in ms
+#define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
 
 
 //------------------------------------------------------------------------------
