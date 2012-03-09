@@ -49,7 +49,7 @@
 /// <tr>
 /// <td>touchBarFrontRight</td>
 /// <td>PTAD_PTAD1</td>
-/// <td>right front touch bar<td>
+/// <td>right front touch bar</td>
 /// </tr>
 /// <tr>
 /// <td>infraredFrontLeft</td>
