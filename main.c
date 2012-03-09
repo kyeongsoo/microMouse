@@ -35,7 +35,7 @@
 ///
 /// Mouse operation mode can be set with the rocker switches 1/2 on the demo
 /// board as follows:
-/// <table>
+/// <table border="1">
 /// <tr>
 /// <th>SW1</th>
 /// <th>SW2</th>
@@ -80,7 +80,7 @@
 /// @subsection sec_global_constants Global Constans
 ///
 /// The following is a summary of important global constants and their default values and descriptions:
-/// <table>
+/// <table border="1">
 /// <tr>
 /// <th>Name</th>
 /// <th>Default Value</th>
