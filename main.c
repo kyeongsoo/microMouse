@@ -31,6 +31,58 @@
 /// The sample programs have been prepared for a DEMO9S08AW60E demonstration
 /// board for ease of testing and debugging with the following configurations:
 ///
+/// @subsection sec_global_constants Global Constans
+///
+/// The table below summarises global constants and their default values and descriptions,
+/// which are defined in the header file ('mouse.h'):
+/// <table border="1">
+/// <tr>
+/// <th>Name</th>
+/// <th>Default Value</th>
+/// <th>Description</th>
+/// </tr>
+/// <tr>
+/// <td>touchBarFrontLeft</td>
+/// <td>PTAD_PTAD2</td>
+/// <td>left front touch bar</td>
+/// </tr>
+/// <tr>
+/// <td>touchBarFrontRight</td>
+/// <td>PTAD_PTAD1</td>
+/// <td>right front touch bar<td>
+/// </tr>
+/// <tr>
+/// <td>infraredFrontLeft</td>
+/// <td>PTAD_PTAD7</td>
+/// <td>left front infrared sensor</td>
+/// </tr>
+/// <tr>
+/// <td>infraredFrontRight</td>
+/// <td>PTAD_PTAD6</td>
+/// <td>right front infrared sensor</td>
+/// </tr>
+/// <tr>
+/// <td>busClock</td>
+/// <td>2</td>
+/// <td>system bus clock in MHz</td>
+/// </tr>
+/// <tr>
+/// <td>pwmPeriod</td>
+/// <td>10</td>
+/// <td>Period of PWM signal in ms</td>
+/// </tr>
+/// <tr>
+/// <td>controlPeriod</td>
+/// <td>50</td>
+/// <td>Period of motor speed control in ms</td>
+/// </tr>
+/// <tr>
+/// <td>defaultSpeed</td>
+/// <td>25</td>
+/// <td>Default speed in terms of percentage duty cycle (e.g., 100% for full speed)</td>
+/// </tr>
+/// </table>
+///
 /// @subsection sec_mouse_operation Mouse Operations
 ///
 /// Mouse operation mode can be set with the rocker switches 1/2 on the demo
@@ -77,32 +129,6 @@
 ///
 /// @subsection sec_motor_control Motor Control
 ///
-/// @subsection sec_global_constants Global Constans
-///
-/// The following is a summary of important global constants and their default values and descriptions:
-/// <table border="1">
-/// <tr>
-/// <th>Name</th>
-/// <th>Default Value</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr>
-/// <td>pwmPeriod</td>
-/// <td>10</td>
-/// <td>Period of PWM signal in ms</td>
-/// </tr>
-/// <tr>
-/// <td>controlPeriod</td>
-/// <td>50</td>
-/// <td>Period of motor speed control in ms</td>
-/// </tr>
-/// <tr>
-/// <td>defaultSpeed</td>
-/// <td>25</td>
-/// <td>Default speed in terms of percentage duty cycle (e.g., 100% for full speed)</td>
-/// </tr>
-/// </table>
-///
 
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
 
@@ -123,17 +149,17 @@ void main(void)
     //--------------------------------------------------------
     // for motor driving with PWM from TPM1
     TPM1SC = 0b00001000;    // edge-aligned PWM on bus rate clock
-    TPM1MOD = word(pwmPeriod * busClock * 1000);    // set PWM period
+    TPM1MOD = (word)(pwmPeriod * busClock * 1000);  // set PWM period
     TPM1C2SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF0
     TPM1C3SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF1
     TPM1C4SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF2
     TPM1C5SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF3
 
     // for motor speed control with timer overflow interrupt of TPM2
-    TPM2SC = 0b01001000;    // enable timer overflow interrupt on bus rate clock
-    TPM2MOD = word(controlPeriod * busClock * 1000);    // set motor speed control period
-    TPM2C0SC = 0b01010000;  // enable interrups on time-out
-    TPM2C1SC = 0b01010000;  // enable interrups on time-out
+    TPM2SC = 0b01001000;    // enable timer overflow and input capture on bus rate clock
+    TPM2MOD = (word)(controlPeriod * busClock * 1000);  // set motor speed control period
+    TPM2C0SC = 0b01000100;  // enable interrups on positive edge
+    TPM2C1SC = 0b01000100;  // enable interrups on positive edge
     diffLeft = 0;           // difference between two consecutive counter values for left motor
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm

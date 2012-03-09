@@ -77,7 +77,7 @@ void ControlSpeed()
         else {
             TPM1C2V = pwLeft;
         }
-        if (pwRight < pwMin || pwright > pwMax) {
+        if (pwRight < pwMin || pwRight > pwMax) {
             pwRight = TPM1C4V;
         }
         else {

@@ -101,13 +101,15 @@ typedef enum {
 /// System specific
 #define busClock        2   ///< system bus clock in MHz
 
-/// Motor speed control.
+/// @name Motor speed control
+//@{
 #define s1  0x4444
 #define s2  0x2222
 #define f   0xFFFF
 #define pwmPeriod       10  ///< period of PWM signal in ms
 #define controlPeriod   50  ///< period of motor speed control in ms
 #define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
+//@}
 
 
 //------------------------------------------------------------------------------
