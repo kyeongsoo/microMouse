@@ -19,7 +19,8 @@
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
 
 
-void AvoidObstacle() {
+void AvoidObstacle()
+{
     mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
 
     for (;;) {
@@ -70,4 +71,75 @@ void AvoidObstacle() {
             ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
         }
     } // end of for() loop
+}
+
+
+// debug mode with simple command-line interface
+void Debug()
+{
+    char command;
+
+    // display a welcome message with a list of commands
+    SCISendNewline();
+    SCISendStr("Welcome to the debug mode of EG-252 sample micromouse programme!\r\n");
+    SCISendNewline();
+    SCISendNewline();
+    SCISendStr("List of available commands:\r\n");
+    SCISendStr("F\tForward\r\n");
+    SCISendStr("R\tReverse\r\n");
+    SCISendStr("S\tStop\r\n");
+    SCISendStr("A\troate Anticlockwise\r\n");
+    SCISendStr("C\trotate Clockwise\r\n");
+    SCISendStr("V\tVeer left Clockwise\r\n");
+    SCISendStr("B\tVeer right Clockwise\r\n");
+    SCISendStr("+\tIncrement speed by 256 units\r\n");
+    SCISendStr("-\tDecrement speed by 256 units\r\n");
+    SCISendStr("D\tDisplay ADC value 7 through 0\r\n");
+    SCISendStr("P\tDisplay PTA as binary number\r\n");
+
+    while (1) {
+        // display prompt and wait for a user input
+        SCIDisplayPrompt();
+        command = (char) SCIGetChar();
+        // TEST
+        if ((command & 0b01111111) == 'F') 
+        {
+                SCISendStr("Forward ... \r\n");
+        }
+        if ((command & 0b01111111) == 0x52)
+        {
+                SCISendStr("Forward ... \r\n");
+        }
+        // TEST
+        switch(command) {
+            case 'F':
+                SCISendStr("Forward ... \r\n");
+                break;
+            case 'R':
+                SCISendStr("Reverse ... \r\n");
+                break;
+            case 'S':
+                break;
+            case 'A':
+                break;
+            case 'C':
+                break;        
+            case '+':
+                break;
+            case '-':
+                break;
+            case 'D':
+                break;
+            case 'P':
+                break;
+            case 'V':
+                break;
+            case 'B':
+                break;
+            case '?':
+                break;
+            default:
+                break;
+        }
+    }   // end of while ()
 }

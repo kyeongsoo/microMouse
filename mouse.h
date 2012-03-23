@@ -40,7 +40,8 @@ typedef enum {
     MOUSE_MODE_READY,
     MOUSE_MODE_OBSTACLE_AVOIDING,
     MOUSE_MODE_LINE_FOLLOWING,
-    MOUSE_MODE_COMBAT
+    MOUSE_MODE_COMBAT,
+    MOUSE_MODE_DEBUG
 } MouseMode;
 
 typedef enum {
@@ -103,7 +104,7 @@ typedef enum {
 
 /// @name Motor speed control
 //@{
-#define s1  0x4444
+#define s1  0x1388
 #define s2  0x2222
 #define f   0xFFFF
 #define pwmPeriod       10  ///< period of PWM signal in ms
@@ -139,6 +140,7 @@ EXTERN int pwMin;
 //@{
 void AvoidObstacle();
 void ControlMouse(MouseAction action);
+void Debug();
 //@}
 
 /// @name Functions for motors
@@ -152,6 +154,17 @@ void ControlSpeed();
 interrupt VectorNumber_Vkeyboard1 void intSW3_4();
 interrupt VectorNumber_Vtpm1ovf void intTPM1OVF();
 //@}
+
+/// @name Funcion for serial communicaiton through SCI
+//@{
+void SCISetup();
+byte SCIReceiveChar();
+void SCISendChar(char ch);
+void SCISendStr(char *str);
+void SCIDisplayPrompt();
+void SCISendNewline();
+//@}
+
 
 /// @name Misc. functions
 //@{

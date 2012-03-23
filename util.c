@@ -30,6 +30,7 @@ byte BitSet(byte Bit_position, byte Var_old)
     return Var_new;
 }
 
+
 // function to clear a specific bit of an unsigned 8-bit integer
 byte BitClear(byte Bit_position, byte Var_old)
 {
@@ -42,7 +43,8 @@ byte BitClear(byte Bit_position, byte Var_old)
 //--------------------------------------------------------
 // Misc. functions
 //--------------------------------------------------------
-void Delay(int a){
+void Delay(int a)
+{
     int b=0,c=0;
     for (b=0;b<a;b++){
         for(c=0;c<100;c++);

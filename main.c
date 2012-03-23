@@ -124,7 +124,7 @@
 /// <td>OFF</td>
 /// </tr>
 /// </table>
-/// @li *  We assume that PTE0 and PTE1 are connected to LED8 and LED9, respectively.
+/// @li *  We assume that PTC2 and PTC6 are connected to LED8 and LED9, respectively.
 /// @li ** These switches are active low and input a logic high when set to the open position.
 ///
 /// @subsection sec_motor_control Motor Control
@@ -140,15 +140,21 @@ void main(void)
 {
     byte sw1, sw2;
     
-//  EnableInterrupts;
     DisableInterrupts;
     SOPT = 0x00; //disable watchdog
-
+    
+/*
+    ICGC1 = 0b01110100; // select external crystal
+    Delay(64);  // start up delay for crystal
+*/    
+    
+    SCISetup(); // setup serial communication via RS-232 I/F
+    
     //--------------------------------------------------------
     // Initialization
     //--------------------------------------------------------
     // for motor driving with PWM from TPM1
-    TPM1SC = 0b00001000;    // edge-aligned PWM on bus rate clock
+    TPM1SC = 0b00001000;    // edge-aligned PWM on bus clock
     TPM1MOD = (word)(pwmPeriod * busClock * 1000);  // set PWM period
     TPM1C2SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF0
     TPM1C3SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF1
@@ -174,6 +180,10 @@ void main(void)
     KBI1SC = BitSet(2, KBI1SC);     // KBACK=1; clear KBI flag
     KBI1SC = BitSet(1, KBI1SC);     // KBIE=1; enable KBI
 
+    // for ADC
+    ADC1CFG = 0b00000000;   // on bus clock, 8-bit conversion
+    APCTL1 = 0b11111111;    // use all 8 pins of port B for ADC
+
     // for motor status
     leftMotor = MOTOR_STATUS_STOP;
     rightMotor = MOTOR_STATUS_STOP;
@@ -186,9 +196,9 @@ void main(void)
     // Open** | Open   | MOUSE_MODE_OBSTACLE_AVOIDING | ON    | ON
     // Open   | Closed | MOUSE_MODE_LINE_FOLLOWING    | ON    | OFF
     // Closed | Open   | MOUSE_MODE_COMBAT            | OFF   | ON
-    // Closed | Closed | Reserved                     | OFF   | OFF
+    // Closed | Closed | MOUSE_MODE_DEBUG             | OFF   | OFF
     // --------------------------------------------------------------
-    // *  We assume that PTE0 and PTE1 are connected to LED8 and LED9, respectively.
+    // *  We assume that PTC2 and PTC6 are connected to LED8 and LED9, respectively.
     // ** These switches are active low and input a logic high when set to the open position.
     //
     PTAPE = 0xFF;   // enable port A pullups for push button switch
@@ -197,32 +207,35 @@ void main(void)
     sw1 = PTAD_PTAD0;  // read switch configuration
     sw2 = PTAD_PTAD1;  // read switch configuration
 
-    PTEDD = 0xFF;   // set port E as output    
-    PTED =  0xFF;   // turn off LEDs
+    PTCDD = 0xFF;   // set port C as output    
+    PTCD =  0xFF;   // turn off LEDs
 
     // simple FSM for motor status handling
     if (sw1 == 1) {
         if (sw2 == 1) {
             mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
-            PTED_PTED0 = 1;
-            PTED_PTED1 = 1;
+            PTCD_PTCD2 = 1;
+            PTCD_PTCD6 = 1;
+            AvoidObstacle();
         }
         else {
             mouseMode = MOUSE_MODE_LINE_FOLLOWING;
-            PTED_PTED0 = 1;
-            PTED_PTED1 = 0;
+            PTCD_PTCD2 = 1;
+            PTCD_PTCD6 = 0;
         }
     }
     else {
         if (sw2 == 1) {
             mouseMode = MOUSE_MODE_COMBAT;
-            PTED_PTED0 = 0;
-            PTED_PTED1 = 1;
+            PTCD_PTCD2 = 0;
+            PTCD_PTCD6 = 1;
         }
         else {
+            mouseMode = MOUSE_MODE_DEBUG;
             // reserved for another mode in the future
-            PTED_PTED0 = 0;
-            PTED_PTED1 = 0;
+            PTCD_PTCD2 = 0;
+            PTCD_PTCD6 = 0;
+            Debug();
         }
     }
 
