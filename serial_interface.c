@@ -19,17 +19,18 @@
 // setup SCI module
 void SCISetup()
 {
-  ICGC1   = 0x78;   // select external crystal;
-  ICGC2   = 0x30;   // multiply by 10; ICGC1 and ICGC2 specify 20 MHz bus clock
-    
-  SCI1BD = 0x0082;  // 9600 baud with the bus clock of 20 MHz
-  SCI1C2  = 0x0C;   // Turn on transmitter and receiver.
+/*
+    ICGC1   = 0b01110100;   // select external crystal;
+    ICGC2   = 0x30;   // multiply by 10; ICGC1 and ICGC2 specify 20 MHz bus clock
+*/    
+    SCI2BD = 0x000D;    // 9600 baud with the bus clock of 2 MHz
+    SCI2C2 = 0b00001100;    // Turn on TX (TE=1) and RX (RE=1) with polling
 
 /*
-    // SCI1BD = 0x000D; // 9600 baud with the bus clock of 2 MHz
-    SCI1BDH = 0x00
-    SCI1BDL = 0x1A; // 9600 baud with the bus clock of 4 MHz (of AW60 demo board)
-    SCI1C2 = 0b00001100;    // turn on TX/RX with polling
+// SCI1BD = 0x000D; // 9600 baud with the bus clock of 2 MHz
+SCI1BDH = 0x00
+SCI1BDL = 0x1A; // 9600 baud with the bus clock of 4 MHz (of AW60 demo board)
+SCI1C2 = 0b00001100;    // turn on TX/RX with polling
 */
 }
 
@@ -37,24 +38,24 @@ void SCISetup()
 // receive a character from SCI port
 byte SCIReceiveChar()
 {
-  byte ch;
+    byte ch;
   
-  while (SCI1S1_RDRF != 1) {
-    // wait for data
-  }
-  ch = SCI1S1;  // clear the RDRF flag
-  ch = SCI1D;   // read the character
-  return ch;
+    while (SCI1S1_RDRF != 1) {
+        // wait for data
+    }
+    ch = SCI1S1;  // clear the RDRF flag
+    ch = SCI1D;   // read the character
+    return ch;
 }
 
 
 // send a character to SCI port
 void SCISendChar(char ch)
 {
-  while (SCI1S1_TDRE != 1){
-    // wait for output buffer empty
-  }
-  SCI1D = ch;   // send the character
+    while (SCI1S1_TDRE != 1){
+        // wait for output buffer empty
+    }
+    SCI1D = ch;   // send the character
 }
 
 
@@ -64,6 +65,7 @@ byte SCIGetChar(void)
     byte ch;
     ch = SCIReceiveChar();
     SCISendChar(ch);
+    SCISendNewLine();
     return ch;
 }
 
@@ -71,10 +73,10 @@ byte SCIGetChar(void)
 // send a string to SCI port
 void SCISendStr(char *str)
 {
-  while (*str != '\0') {
-    SCISendChar(*str);
-    str++;
-  }
+    while (*str != '\0') {
+        SCISendChar(*str);
+        str++;
+    }
 }
 
 
@@ -86,8 +88,22 @@ void SCIDisplayPrompt()
 }
 
 
+// display bit representation of a byte/character
+void SCIDisplayBitString(char ch)
+{
+    int i;
+    char bit;
+    
+    for (i = 0; i < 8; i++) {
+        bit = (ch & (0x80 >> i)) ? '1' : '0';
+        SCISendChar(bit);
+    }
+    SCISendNewLine();
+}
+
+
 // send newline and return characters
-void SCISendNewline()
+void SCISendNewLine()
 {
     SCISendStr("\r\n");
 }

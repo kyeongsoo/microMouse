@@ -138,16 +138,13 @@
 
 void main(void)
 {
-    byte sw1, sw2;
+    byte tbfr, tbfl, tbrr, tbrl;
     
     DisableInterrupts;
     SOPT = 0x00; //disable watchdog
     
-/*
     ICGC1 = 0b01110100; // select external crystal
     Delay(64);  // start up delay for crystal
-*/    
-    
     SCISetup(); // setup serial communication via RS-232 I/F
     
     //--------------------------------------------------------
@@ -171,6 +168,7 @@ void main(void)
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
     scaleFactor = 2;        // scale factor used in motor speed control    
 
+/*
     // for KBI handling
     PTDPE = 0xFF;   // enable port D pullups for push button switch
     PTDDD = 0x00;   // set port D as input; switches 3 and 4 are connected to port D3 and D2, respectively
@@ -179,6 +177,7 @@ void main(void)
     KBI1SC = BitClear(0, KBI1SC);   // KBIMOD=0; select edge-only detection
     KBI1SC = BitSet(2, KBI1SC);     // KBACK=1; clear KBI flag
     KBI1SC = BitSet(1, KBI1SC);     // KBIE=1; enable KBI
+*/
 
     // for ADC
     ADC1CFG = 0b00000000;   // on bus clock, 8-bit conversion
@@ -188,6 +187,7 @@ void main(void)
     leftMotor = MOTOR_STATUS_STOP;
     rightMotor = MOTOR_STATUS_STOP;
 
+/*
     //
     // Now we are going to set the mouse operation mode according to rocker switches 1 & 2 as follows:
     // --------------------------------------------------------------
@@ -222,6 +222,7 @@ void main(void)
             mouseMode = MOUSE_MODE_LINE_FOLLOWING;
             PTCD_PTCD2 = 1;
             PTCD_PTCD6 = 0;
+            LineFollowing();
         }
     }
     else {
@@ -237,6 +238,27 @@ void main(void)
             PTCD_PTCD6 = 0;
             Debug();
         }
+    }
+*/
+
+    PTAPE = 0xFF;   // enable port A pullups for push button switch
+    PTADD = 0x00;   // set port A as input; switches 1 and 2 are connected to port A0 and A1, respectively
+
+    tbfl = touchBarFrontLeft;
+    tbfr = touchBarFrontRight;
+    tbrl = touchBarRearLeft;
+    tbrr = touchBarRearRight;
+    
+    if ((tbfl == 1) && (tbfr == 1)) {
+        mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+        AvoidObstacle();
+    }
+    else if ((tbrl == 1) && (tbrr == 1)) {
+        mouseMode = MOUSE_MODE_LINE_FOLLOWING;
+        LineFollowing();
+    }
+    else {
+        Debug();
     }
 
     // now we are ready to go!

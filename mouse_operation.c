@@ -74,16 +74,71 @@ void AvoidObstacle()
 }
 
 
+void LineFollowing ()
+{
+    mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+
+    for (;;) {
+        // first move forward
+        ControlMouse(MOUSE_ACTION_FORWARD);
+
+        // first, check the status of touch bars
+        if (!touchBarFrontLeft && !touchBarFrontRight) {
+            // neither is touched (i.e., both the values are zero)
+
+            // then check the status of IF sensors
+            if (!infraredFrontLeft && !infraredFrontRight) {
+                // neither is touched (i.e., both the values are zero)
+                // then, back to the loop
+                break;
+            }
+            else if (infraredFrontLeft) {
+                // left sensor detects; avoid left obstacle
+
+            }
+            else if (infraredFrontRight) {
+                // right sensor detects; avoid right obstacle
+
+            }
+            else {
+                // both sensors detect; avoid front obstacle
+                ControlMouse(MOUSE_ACTION_STOP);
+                ControlMouse(MOUSE_ACTION_REVERSE);
+                ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
+            }
+        }
+        else if (touchBarFrontLeft) {
+            // left bar is touched; avoid left obstacle
+            ControlMouse(MOUSE_ACTION_STOP);
+            ControlMouse(MOUSE_ACTION_REVERSE);
+            ControlMouse(MOUSE_ACTION_TURNRIGHT);
+        }
+        else if (touchBarFrontRight) {
+            // right bar is touched; avoid right obstacle
+            ControlMouse(MOUSE_ACTION_STOP);
+            ControlMouse(MOUSE_ACTION_REVERSE);
+            ControlMouse(MOUSE_ACTION_TURNLEFT);
+        }
+        else {
+            // both bars are touched; avoid front obstacle
+            ControlMouse(MOUSE_ACTION_STOP);
+            ControlMouse(MOUSE_ACTION_REVERSE);
+            ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
+        }
+    } // end of for() loop
+}
+
+
 // debug mode with simple command-line interface
 void Debug()
 {
-    char command;
+    byte command;
 
     // display a welcome message with a list of commands
-    SCISendNewline();
+    SCISendNewLine();
     SCISendStr("Welcome to the debug mode of EG-252 sample micromouse programme!\r\n");
-    SCISendNewline();
-    SCISendNewline();
+    SCISendNewLine();
+    SCISendNewLine();
     SCISendStr("List of available commands:\r\n");
     SCISendStr("F\tForward\r\n");
     SCISendStr("R\tReverse\r\n");
@@ -100,25 +155,48 @@ void Debug()
     while (1) {
         // display prompt and wait for a user input
         SCIDisplayPrompt();
-        command = (char) SCIGetChar();
+        command = SCIGetChar();
+        
         // TEST
-        if ((command & 0b01111111) == 'F') 
+        SCIDisplayBitString(command);
+        SCIDisplayBitString((char)'F');
+        SCIDisplayBitString((byte)'R');
+        SCIDisplayBitString('S');
+        if ((int)command == 70)
         {
-                SCISendStr("Forward ... \r\n");
+            SCISendStr("Forward ... \r\n");
         }
         if ((command & 0b01111111) == 0x52)
         {
-                SCISendStr("Forward ... \r\n");
+            SCISendStr("Reverse ... \r\n");
+        }
+        if ((int)command > 256) 
+        {
+            SCISendStr("Greater than 256\r\n");
+        }
+        else if ((int)command > 128) 
+        {
+            SCISendStr("Greater than 128\r\n");
+        }
+        else if ((int)command > 64)
+        {
+            SCISendStr("Greater than 64\r\n");
+        }
+        else
+        {
+            SCISendStr("Less than or eqal to 64\r\n");
         }
         // TEST
+
         switch(command) {
-            case 'F':
+            case 70:  // ascii code for 'F'
                 SCISendStr("Forward ... \r\n");
                 break;
-            case 'R':
+            case 82:  // ascii code for 'R'
                 SCISendStr("Reverse ... \r\n");
                 break;
-            case 'S':
+            case 83:  // ascii code for 'S'
+                SCISendStr("Stop ... \r\n");
                 break;
             case 'A':
                 break;

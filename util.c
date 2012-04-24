@@ -20,7 +20,7 @@
 
 
 //------------------------------------------------------------------------------
-// Functions for KBI handling
+// Functions for bit handling
 //------------------------------------------------------------------------------
 // function to set a specific bit of an unsigned 8-bit integer
 byte BitSet(byte Bit_position, byte Var_old)

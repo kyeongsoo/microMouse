@@ -84,19 +84,28 @@ typedef enum {
 //  Macros and global constants
 //------------------------------------------------------------------------------
 /// @name Touch Bar Switches
-/// We assume that PTAD2 and PTAD1 are connected to front touch
-/// bars left and right, respectively
+/// We assume that PTAD0-3 are connected to switches.
 //@{
-#define touchBarFrontLeft   PTAD_PTAD2
-#define touchBarFrontRight  PTAD_PTAD1
+#define touchBarFrontLeft   PTAD_PTAD1
+#define touchBarFrontRight  PTAD_PTAD2
+#define touchBarRearLeft    PTAD_PTAD3
+#define touchBarRearRight   PTAD_PTAD0
 //@}
 
 /// @name IR sensors
-/// We assume that PTAD7 and PTAD6 are connected to front infrared sensors
-/// left and right, respectively
+/// We assume that PTAD6-7 are connected to infrared sensors.
 //@{
 #define infraredFrontLeft   PTAD_PTAD7
 #define infraredFrontRight  PTAD_PTAD6
+//@}
+
+/// @name Line Following sensors
+/// We assume that PTBD0-3 are connected to line following sensors.
+//@{
+#define lineFollowingFrontLeft  PTBD_PTBD1
+#define lineFollowingFrontRight PTBD_PTBD0
+#define lineFollowingRearLeft   PTBD_PTBD3
+#define lineFollowingRearRight  PTBD_PTBD2
 //@}
 
 /// System specific
@@ -140,6 +149,7 @@ EXTERN int pwMin;
 //@{
 void AvoidObstacle();
 void ControlMouse(MouseAction action);
+void LineFollowing();
 void Debug();
 //@}
 
@@ -162,7 +172,7 @@ byte SCIReceiveChar();
 void SCISendChar(char ch);
 void SCISendStr(char *str);
 void SCIDisplayPrompt();
-void SCISendNewline();
+void SCISendNewLine();
 //@}
 
 
