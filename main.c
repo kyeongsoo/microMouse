@@ -26,6 +26,11 @@
 ///
 /// @section    sec_install Installation
 ///
+/// The source files are maintained at a <a href="https://github.com/kyeongsoo/microMouse">github repository</a>.
+/// You can either download the whole <a href="https://github.com/kyeongsoo/microMouse/downloads">source tree</a>
+/// or clone the repository on your computer using the URL for a read-only access (git://github.com/kyeongsoo/microMouse.git)
+/// if you have a git client (e.g., <a href="http://code.google.com/p/tortoisegit/">tortoisegit</a>).
+///
 /// @section    sec_config Configurations
 ///
 /// The sample programs have been prepared for a DEMO9S08AW60E demonstration
