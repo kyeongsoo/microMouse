@@ -109,7 +109,7 @@ typedef enum {
 //@}
 
 /// System specific
-#define busClock        2   ///< system bus clock in MHz
+#define busClock        2   ///< system bus clock in MHz; one half of the CPU clock frequency (4 MHz)
 
 /// @name Motor speed control
 //@{
