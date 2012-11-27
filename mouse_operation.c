@@ -221,3 +221,10 @@ void Debug()
         }
     }   // end of while ()
 }
+
+
+// simple test mode for testing functions
+void Test()
+{
+	ControlMouse(MOUSE_ACTION_REVERSE);
+}
