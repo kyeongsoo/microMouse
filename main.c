@@ -158,16 +158,16 @@ void main(void)
     // for motor driving with PWM from TPM1
     TPM1SC = 0b00001000;    // edge-aligned PWM on bus clock
     TPM1MOD = (word)(pwmPeriod * busClock * 1000);  // set PWM period
-    TPM1C2SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF0
-    TPM1C3SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF1
-    TPM1C4SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF2
-    TPM1C5SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF3
+    TPM1C2SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF0 (left motor IN_A)
+    TPM1C3SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF1 (left motor IN_B)
+    TPM1C4SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF2 (right motor IN_A)
+    TPM1C5SC = 0b00101000;  // edge-aligned PWM with high-true pulses for PTF3 (right motor IN_B)
 
     // for motor speed control with timer overflow interrupt of TPM2
     TPM2SC = 0b01001000;    // enable timer overflow and input capture on bus rate clock
     TPM2MOD = (word)(controlPeriod * busClock * 1000);  // set motor speed control period
-    TPM2C0SC = 0b01000100;  // enable interrups on positive edge
-    TPM2C1SC = 0b01000100;  // enable interrups on positive edge
+    TPM2C0SC = 0b01000100;  // enable interrups on positive edge for PTF4 (left tachometer)
+    TPM2C1SC = 0b01000100;  // enable interrups on positive edge for PTF5 (right tachometer)
     diffLeft = 0;           // difference between two consecutive counter values for left motor
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
@@ -249,10 +249,17 @@ void main(void)
     PTAPE = 0xFF;   // enable port A pullups for push button switch
     PTADD = 0x00;   // set port A as input; switches 1 and 2 are connected to port A0 and A1, respectively
 
-    tbfl = touchBarFrontLeft;
-    tbfr = touchBarFrontRight;
-    tbrl = touchBarRearLeft;
-    tbrr = touchBarRearRight;
+	//----------------------------------------------------------------------------------
+	// Note that we temporarily comment out the following for testing the sample program
+    //----------------------------------------------------------------------------------
+	// tbfl = touchBarFrontLeft;
+    // tbfr = touchBarFrontRight;
+    // tbrl = touchBarRearLeft;
+    // tbrr = touchBarRearRight;
+	//----------------------------------------------------------------------------------
+	// Then, set the following to enter a test mode for testing component functions
+	//----------------------------------------------------------------------------------
+	tbfl = 0;
     
     if ((tbfl == 1) && (tbfr == 1)) {
         mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
@@ -263,12 +270,13 @@ void main(void)
         LineFollowing();
     }
     else {
-        Debug();
+		Test();
+        // Debug();
     }
 
     // now we are ready to go!
     EnableInterrupts;
     for(;;) {
-        // do nothing; justwaiting for interrupts
+        // do nothing; just waiting for interrupts
     }
 }
