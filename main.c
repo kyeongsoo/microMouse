@@ -135,10 +135,11 @@
 /// @subsection sec_motor_control Motor Control
 ///
 
+
+#define MAIN_PROGRAM  // notify the compiler that this is where main() is, especially to avoid duplicate definitions of global variables in "mouse.h"
+
+
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
-
-
-#define MAIN_PROGRAM  // notify the compiler that this is where main() is, especially to avoid duplicate definitions of global variables
 
 
 void main(void)
@@ -172,6 +173,11 @@ void main(void)
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
     scaleFactor = 2;        // scale factor used in motor speed control    
+    nomSpeed = 0x2000;      // nominal speed
+    pwLeft = defaultSpeed;  // PWM duty cycle for left motor
+    pwRight = defaultSpeed; // PWM duty cycle for right motor
+    pwMax = 50;             // maximum for PWM duty cycle
+    pwMin = 10;             // minimum for PWM duty cycle
 
 /*
     // for KBI handling
@@ -276,7 +282,7 @@ void main(void)
 
     // now we are ready to go!
     EnableInterrupts;
-    for(;;) {
+    for (;;) {
         // do nothing; just waiting for interrupts
     }
 }
