@@ -38,7 +38,7 @@ void ControlMouse(MouseAction action)
             ControlMotor(MOTOR_LEFT, MOTOR_ACTION_REVERSE);
         }
         if (rightMotor != MOTOR_STATUS_REVERSE) {
-            ControlMotor(MOTER_RIGHT, MOTOR_ACTION_REVERSE);
+            ControlMotor(MOTOR_RIGHT, MOTOR_ACTION_REVERSE);
         }
         if (mouseStatus != MOUSE_STATUS_REVERSE) {
             mouseStatus = MOUSE_STATUS_REVERSE;
