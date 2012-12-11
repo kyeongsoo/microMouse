@@ -152,7 +152,7 @@ void Debug()
     SCISendStr("D\tDisplay ADC value 7 through 0\r\n");
     SCISendStr("P\tDisplay PTA as binary number\r\n");
 
-    while (1) {
+  while (1) {
         // display prompt and wait for a user input
         SCIDisplayPrompt();
         command = SCIGetChar();
@@ -226,5 +226,21 @@ void Debug()
 // simple test mode for testing functions
 void Test()
 {
-	ControlMouse(MOUSE_ACTION_REVERSE);
+  int opDelay = 10000;
+  
+  while (1) {
+    ControlMouse(MOUSE_ACTION_FORWARD);
+    Delay(opDelay);
+    ControlMouse(MOUSE_ACTION_REVERSE);
+    Delay(opDelay);
+    ControlMouse(MOUSE_ACTION_TURNLEFT);
+    Delay(opDelay);
+    ControlMouse(MOUSE_ACTION_TURNRIGHT);
+    Delay(opDelay);
+    ControlMouse(MOUSE_ACTION_TURNAROUND);
+    Delay(opDelay);
+    ControlMouse(MOUSE_ACTION_STOP);
+    Delay(opDelay);
+
+  }
 }
