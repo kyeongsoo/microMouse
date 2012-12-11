@@ -115,7 +115,7 @@ typedef enum {
 //@{
 #define s1  0x1388
 #define s2  0x2222
-#define f   0xFFFF
+#define HIGH_WORD       0xFFFF
 #define pwmPeriod       10  ///< period of PWM signal in ms
 #define controlPeriod   50  ///< period of motor speed control in ms
 #define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
@@ -131,15 +131,15 @@ EXTERN MotorStatus leftMotor;   ///< status of left motor
 EXTERN MotorStatus rightMotor;  ///< status of right motor
 
 // Motor speed control
-EXTERN int diffLeft;            ///< difference between two consecutive counter values for left motor
-EXTERN int diffRight;           ///< difference between two consecutive counter values for right motor
+EXTERN word diffLeft;            ///< difference between two consecutive counter values for left motor
+EXTERN word diffRight;           ///< difference between two consecutive counter values for right motor
 EXTERN int travelDistance;      ///< distance to travel; one unit is approximately 0.5 mm
 EXTERN int scaleFactor;         ///< scale factor used in motor speed control
 EXTERN int nomSpeed;
-EXTERN int pwLeft;
-EXTERN int pwRight;
-EXTERN int pwMax;
-EXTERN int pwMin;
+EXTERN word pwLeft;
+EXTERN word pwRight;
+EXTERN word pwMax;
+EXTERN word pwMin;
 
 
 //------------------------------------------------------------------------------
@@ -147,32 +147,35 @@ EXTERN int pwMin;
 //------------------------------------------------------------------------------
 /// @name Functions for mouse
 //@{
-void AvoidObstacle();
+void AvoidObstacle(void);
 void ControlMouse(MouseAction action);
-void LineFollowing();
-void Debug();
+void LineFollowing(void);
+void Debug(void);
+void Test(void);
 //@}
 
 /// @name Functions for motors
 //@{
 void ControlMotor(Motor motor, MotorAction action);
-void ControlSpeed();
+void ControlSpeed(void);
 //@}
 
 /// @name Interrupt service routines (ISRs)
 //@{
-interrupt VectorNumber_Vkeyboard1 void intSW3_4();
-interrupt VectorNumber_Vtpm1ovf void intTPM1OVF();
+interrupt VectorNumber_Vkeyboard1 void intSW3_4(void);
+interrupt VectorNumber_Vtpm1ovf void intTPM1OVF(void);
 //@}
 
 /// @name Funcion for serial communicaiton through SCI
 //@{
-void SCISetup();
-byte SCIReceiveChar();
+void SCISetup(void);
+byte SCIReceiveChar(void);
 void SCISendChar(char ch);
+byte SCIGetChar(void);
 void SCISendStr(char *str);
-void SCIDisplayPrompt();
-void SCISendNewLine();
+void SCIDisplayPrompt(void);
+void SCIDisplayBitString(char ch);
+void SCISendNewLine(void);
 //@}
 
 
