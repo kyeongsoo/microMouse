@@ -85,14 +85,14 @@ interrupt VectorNumber_Vtpm2ovf void intTPM2OVF()
 interrupt VectorNumber_Vtpm2ch0 void intTPM2CH0()
 {
     byte tmp;
-    static int oldLeft = 0;
+    static word oldLeft = 0;
 
     // clear TPM2 channel 0 flag    
     tmp = TPM2C0SC_CH0F;    // first, need to read from TPM2 channel 0 flag bit
     TPM2C0SC_CH0F = 0;      // then, clear TPM2 channel 0 flag
     
-    diffLeft = TPM2C0VH - oldLeft;
-    oldLeft = TPM2C0VH;
+    diffLeft = TPM2C0V - oldLeft;
+    oldLeft = TPM2C0V;
     
     if (travelDistance > 0) {
         // check travelDistance variable and decrement if it is greater than zero
@@ -105,14 +105,14 @@ interrupt VectorNumber_Vtpm2ch0 void intTPM2CH0()
 interrupt VectorNumber_Vtpm2ch1 void intTPM2CH1()
 {
     byte tmp;
-    static int oldRight = 0;
+    static word oldRight = 0;
 
     // clear TPM2 channel 1 flag    
     tmp = TPM2C1SC_CH1F;    // first, need to read from TPM2 channel 1 flag bit
     TPM2C1SC_CH1F = 0;      // then, clear TPM2 channel 1 flag
     
-    diffRight = TPM2C1VH - oldRight;
-    oldRight = TPM2C1VH;
+    diffRight = TPM2C1V - oldRight;
+    oldRight = TPM2C1V;
     
     if (travelDistance > 0) {
         // check travelDistance variable and decrement if it is greater than zero
