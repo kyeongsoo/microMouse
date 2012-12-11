@@ -22,23 +22,23 @@
 void ControlMotor(Motor motor, MotorAction action)
 {
     MotorStatus status;
-    dword tpm1, tpm2;
+    word tpm1, tpm2;
     // holding values to be transferred to TPM registers (TPM1C2V/TPM1C3V or TPM1C4V/TPM1C5V)
 
     switch (action) {
     case MOTOR_ACTION_FORWARD:
-        tpm1 = s1;
-        tpm2 = f;
+        tpm1 = (word)(pwLeft*TPM1MOD/100);
+        tpm2 = HIGH_WORD;
         status = MOTOR_STATUS_FORWARD;
         break;
     case MOTOR_ACTION_REVERSE:
-        tpm1 = f;
-        tpm2 = s1;
+        tpm1 = HIGH_WORD;
+        tpm2 = (word)(pwRight*TPM1MOD/100);
         status = MOTOR_STATUS_REVERSE;
         break;
     case MOTOR_ACTION_STOP:
-        tpm1 = f;
-        tpm2 = f;
+        tpm1 = HIGH_WORD;
+        tpm2 = HIGH_WORD;
         status = MOTOR_STATUS_STOP;
         break;
     }
@@ -56,33 +56,26 @@ void ControlMotor(Motor motor, MotorAction action)
 
 
 // main speed control function called by TPM2 timer overflow ISR
-void ControlSpeed()
+void ControlSpeed(void)
 {
-    int corr;
-    int diff;
+    int corr, diff;
+    word tmpLeft, tmpRight;
     
     diff = diffLeft - diffRight;
     
     if (diff != 0) {
         // adjust the speeds of left and right motors based on the difference
         diff = diff / scaleFactor;
-        pwLeft -= diff;
-        pwRight += diff;
+        tmpLeft = pwLeft - diff;
+        tmpRight = pwRight + diff;
         
         // if the new value is greater than pwMax or smaller than pwMin, recover the original value from TPM1 channel value register;
         // otherwise, update the rigster with the new value.
-        if (pwLeft < pwMin || pwLeft > pwMax) {
-            pwLeft = TPM1C2V;
+        if (tmpLeft >= pwMin || tmpLeft <= pwMax) {
+            pwLeft = tmpLeft;
         }
-        else {
-            TPM1C2V = pwLeft;
+        if (tmpRight >= pwMin || tmpRight <= pwMax) {
+            pwRight = tmpLeft;
         }
-        if (pwRight < pwMin || pwRight > pwMax) {
-            pwRight = TPM1C4V;
-        }
-        else {
-            TPM1C4V = pwRight;
-        }
-
     }
 }
