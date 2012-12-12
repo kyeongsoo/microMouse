@@ -1,0 +1,28 @@
+\hypertarget{index_sec_intro}{}\section{\-Introduction}\label{index_sec_intro}
+\-This web page provides information on the sample micromouse programs in \-C and gives advices on how to install programs and modify them for your own micromouse.\hypertarget{index_sec_install}{}\section{\-Installation}\label{index_sec_install}
+\-The source files are maintained at a \href{https://github.com/kyeongsoo/microMouse}{\tt github repository}. \-You can either download the whole \href{https://github.com/kyeongsoo/microMouse/downloads}{\tt source tree} or clone the repository on your computer using the \-U\-R\-L for a read-\/only access (git\-://github.com/kyeongsoo/micro\-Mouse.\-git) if you have a git client (e.\-g., \href{http://code.google.com/p/tortoisegit/}{\tt tortoisegit}).\hypertarget{index_sec_config}{}\section{\-Configurations}\label{index_sec_config}
+\-The sample programs have been prepared for a \-D\-E\-M\-O9\-S08\-A\-W60\-E demonstration board for ease of testing and debugging with the following configurations\-:\hypertarget{index_sec_global_constants}{}\subsection{\-Global Constans}\label{index_sec_global_constants}
+\-The table below summarises global constants and their default values and descriptions, which are defined in the header file ('mouse.h')\-: \begin{TabularC}{3}
+\hline
+\-Name &\-Default \-Value &\-Description  \\\cline{1-3}
+touch\-Bar\-Front\-Left &\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D2 &left front touch bar  \\\cline{1-3}
+touch\-Bar\-Front\-Right &\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D1 &right front touch bar  \\\cline{1-3}
+infrared\-Front\-Left &\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D7 &left front infrared sensor  \\\cline{1-3}
+infrared\-Front\-Right &\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D6 &right front infrared sensor  \\\cline{1-3}
+bus\-Clock &2 &system bus clock in \-M\-Hz  \\\cline{1-3}
+pwm\-Period &10 &\-Period of \-P\-W\-M signal in ms  \\\cline{1-3}
+control\-Period &50 &\-Period of motor speed control in ms  \\\cline{1-3}
+default\-Speed &25 &\-Default speed in terms of percentage duty cycle (e.\-g., 100\% for full speed)  \\\cline{1-3}
+\end{TabularC}
+\hypertarget{index_sec_mouse_operation}{}\subsection{\-Mouse Operations}\label{index_sec_mouse_operation}
+\-Mouse operation mode can be set with the rocker switches 1/2 on the demo board as follows\-: \begin{TabularC}{5}
+\hline
+\-S\-W1 &\-S\-W2 &\-Operation \-Mode &\-L\-E\-D8$\ast$ &\-L\-E\-D9$\ast$  \\\cline{1-5}
+\-Open$\ast$$\ast$ &\-Open &\-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-\_\-\-A\-V\-O\-I\-D\-I\-N\-G &\-O\-N &\-O\-N  \\\cline{1-5}
+\-Open &\-Closed &\-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-M\-O\-D\-E\-\_\-\-L\-I\-N\-E\-\_\-\-F\-O\-L\-L\-O\-W\-I\-N\-G &\-O\-N &\-O\-F\-F  \\\cline{1-5}
+\-Closed &\-Open &\-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-M\-O\-D\-E\-\_\-\-C\-O\-M\-B\-A\-T &\-O\-F\-F &\-O\-N  \\\cline{1-5}
+\-Closed &\-Closed &\-Reserved &\-O\-F\-F &\-O\-F\-F  \\\cline{1-5}
+\end{TabularC}
+\begin{DoxyItemize}
+\item $\ast$ \-We assume that \-P\-T\-C2 and \-P\-T\-C6 are connected to \-L\-E\-D8 and \-L\-E\-D9, respectively. \item $\ast$$\ast$ \-These switches are active low and input a logic high when set to the open position.\end{DoxyItemize}
+\hypertarget{index_sec_motor_control}{}\subsection{\-Motor Control}\label{index_sec_motor_control}

@@ -1,0 +1,389 @@
+\hypertarget{mouse_8h}{
+\section{mouse.h \-File \-Reference}
+\label{mouse_8h}\index{mouse.\-h@{mouse.\-h}}
+}
+
+
+\-Declares system-\/wide types, macros, variables, and functions for the micro mouse program.  
+
+
+{\ttfamily \#include $<$hidef.\-h$>$}\*
+{\ttfamily \#include \char`\"{}derivative.\-h\char`\"{}}\*
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}{
+\#define \hyperlink{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}{\-\_\-\-M\-I\-C\-R\-O\-\_\-\-M\-O\-U\-S\-E\-\_\-\-H}}
+\label{mouse_8h_a759c2f50e6223e6b5588c9e0c9965863}
+
+\begin{DoxyCompactList}\small\item\em to avoid duplicate inclusion of the same header file \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a77366c1bd428629dc898e188bfd182a3}{
+\#define \hyperlink{mouse_8h_a77366c1bd428629dc898e188bfd182a3}{\-E\-X\-T\-E\-R\-N}~extern}
+\label{mouse_8h_a77366c1bd428629dc898e188bfd182a3}
+
+\begin{DoxyCompactList}\small\item\em for \-Enable\-Interrupts macro include peripheral declarations \end{DoxyCompactList}\item 
+\#define \hyperlink{mouse_8h_a7934586edf32fa177c8e5ed88de45656}{bus\-Clock}~2
+\begin{DoxyCompactList}\small\item\em \-System specific. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\paragraph*{\-Touch \-Bar \-Switches}
+{\em \-We assume that \-P\-T\-A\-D0-\/3 are connected to switches. }\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_acecaf2a75e78f076f0aa3e7ef64e1d04}{
+\#define {\bfseries touch\-Bar\-Front\-Left}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D1}
+\label{mouse_8h_acecaf2a75e78f076f0aa3e7ef64e1d04}
+
+\item 
+\hypertarget{mouse_8h_af607ec03617ff68c5be4ea582763d116}{
+\#define {\bfseries touch\-Bar\-Front\-Right}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D2}
+\label{mouse_8h_af607ec03617ff68c5be4ea582763d116}
+
+\item 
+\hypertarget{mouse_8h_a85cb911b8abcc4618ee2d2554fe80a20}{
+\#define {\bfseries touch\-Bar\-Rear\-Left}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D3}
+\label{mouse_8h_a85cb911b8abcc4618ee2d2554fe80a20}
+
+\item 
+\hypertarget{mouse_8h_af145c5d507630a54ee42e7c7804ad465}{
+\#define {\bfseries touch\-Bar\-Rear\-Right}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D0}
+\label{mouse_8h_af145c5d507630a54ee42e7c7804ad465}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-I\-R sensors}
+{\em \-We assume that \-P\-T\-A\-D6-\/7 are connected to infrared sensors. }\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a0fd4e2f4de6f80efee386a99d789fd8a}{
+\#define {\bfseries infrared\-Front\-Left}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D7}
+\label{mouse_8h_a0fd4e2f4de6f80efee386a99d789fd8a}
+
+\item 
+\hypertarget{mouse_8h_a944d7f3cfeced4d7fc6340733664f252}{
+\#define {\bfseries infrared\-Front\-Right}~\-P\-T\-A\-D\-\_\-\-P\-T\-A\-D6}
+\label{mouse_8h_a944d7f3cfeced4d7fc6340733664f252}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Line \-Following sensors}
+{\em \-We assume that \-P\-T\-B\-D0-\/3 are connected to line following sensors. }\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_af9b6a5d35c24bb38801cc2aadb8713f0}{
+\#define {\bfseries line\-Following\-Front\-Left}~\-P\-T\-B\-D\-\_\-\-P\-T\-B\-D1}
+\label{mouse_8h_af9b6a5d35c24bb38801cc2aadb8713f0}
+
+\item 
+\hypertarget{mouse_8h_a4e673210636cb552c98dfab48398c9e9}{
+\#define {\bfseries line\-Following\-Front\-Right}~\-P\-T\-B\-D\-\_\-\-P\-T\-B\-D0}
+\label{mouse_8h_a4e673210636cb552c98dfab48398c9e9}
+
+\item 
+\hypertarget{mouse_8h_a7a366b856945a9108cb36f797834d7cc}{
+\#define {\bfseries line\-Following\-Rear\-Left}~\-P\-T\-B\-D\-\_\-\-P\-T\-B\-D3}
+\label{mouse_8h_a7a366b856945a9108cb36f797834d7cc}
+
+\item 
+\hypertarget{mouse_8h_a1c70f910aa91cdcc1ec5073e09b9ba39}{
+\#define {\bfseries line\-Following\-Rear\-Right}~\-P\-T\-B\-D\-\_\-\-P\-T\-B\-D2}
+\label{mouse_8h_a1c70f910aa91cdcc1ec5073e09b9ba39}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Motor speed control}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a09dff3d9a89874939fa7cc9d056b114c}{
+\#define {\bfseries s1}~0x1388}
+\label{mouse_8h_a09dff3d9a89874939fa7cc9d056b114c}
+
+\item 
+\hypertarget{mouse_8h_a3ec77fc652b1787d9ace19f0f8fb6072}{
+\#define {\bfseries s2}~0x2222}
+\label{mouse_8h_a3ec77fc652b1787d9ace19f0f8fb6072}
+
+\item 
+\hypertarget{mouse_8h_a1045594d75ca5dcdb1ebd45a7c274509}{
+\#define {\bfseries \-H\-I\-G\-H\-\_\-\-W\-O\-R\-D}~0x\-F\-F\-F\-F}
+\label{mouse_8h_a1045594d75ca5dcdb1ebd45a7c274509}
+
+\item 
+\hypertarget{mouse_8h_aa72f74d6b54c9bd0290afb53f5aaab8d}{
+\#define \hyperlink{mouse_8h_aa72f74d6b54c9bd0290afb53f5aaab8d}{pwm\-Period}~10}
+\label{mouse_8h_aa72f74d6b54c9bd0290afb53f5aaab8d}
+
+\begin{DoxyCompactList}\small\item\em period of \-P\-W\-M signal in ms \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_aac3d294bce7a9a7d3e466f1e880f97d8}{
+\#define \hyperlink{mouse_8h_aac3d294bce7a9a7d3e466f1e880f97d8}{control\-Period}~50}
+\label{mouse_8h_aac3d294bce7a9a7d3e466f1e880f97d8}
+
+\begin{DoxyCompactList}\small\item\em period of motor speed control in ms \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_af7120910cf9335c315baecee8abdf206}{
+\#define \hyperlink{mouse_8h_af7120910cf9335c315baecee8abdf206}{default\-Speed}~25}
+\label{mouse_8h_af7120910cf9335c315baecee8abdf206}
+
+\begin{DoxyCompactList}\small\item\em default speed in terms of percentage duty cycle (e.\-g., 100\% for full speed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{\-Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries \-Mouse\-Mode} \{ \*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-R\-E\-A\-D\-Y}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-\_\-\-A\-V\-O\-I\-D\-I\-N\-G}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-L\-I\-N\-E\-\_\-\-F\-O\-L\-L\-O\-W\-I\-N\-G}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-C\-O\-M\-B\-A\-T}, 
+\*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-M\-O\-D\-E\-\_\-\-D\-E\-B\-U\-G}
+ \}
+\item 
+enum {\bfseries \-Mouse\-Status} \{ \*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-S\-T\-O\-P}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-L\-E\-F\-T}, 
+\*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-R\-I\-G\-H\-T}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-T\-U\-R\-N\-A\-R\-O\-U\-N\-D}
+ \}
+\item 
+enum {\bfseries \-Mouse\-Action} \{ \*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-S\-T\-O\-P}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-L\-E\-F\-T}, 
+\*
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-R\-I\-G\-H\-T}, 
+{\bfseries \-M\-O\-U\-S\-E\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-T\-U\-R\-N\-A\-R\-O\-U\-N\-D}
+ \}
+\item 
+enum {\bfseries \-Motor} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-L\-E\-F\-T}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-R\-I\-G\-H\-T}
+ \}
+\item 
+enum {\bfseries \-Motor\-Status} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-S\-T\-O\-P}
+ \}
+\item 
+enum {\bfseries \-Motor\-Action} \{ {\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-F\-O\-R\-W\-A\-R\-D}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-R\-E\-V\-E\-R\-S\-E}, 
+{\bfseries \-M\-O\-T\-O\-R\-\_\-\-A\-C\-T\-I\-O\-N\-\_\-\-S\-T\-O\-P}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{Indent}\paragraph*{\-Functions for mouse}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a5fae7fefe19264e48505d7337c954427}{
+void {\bfseries \-Avoid\-Obstacle} (void)}
+\label{mouse_8h_a5fae7fefe19264e48505d7337c954427}
+
+\item 
+\hypertarget{mouse_8h_abee94d38967e937b7409918da94e0be0}{
+void {\bfseries \-Control\-Mouse} (\-Mouse\-Action action)}
+\label{mouse_8h_abee94d38967e937b7409918da94e0be0}
+
+\item 
+\hypertarget{mouse_8h_a1f745785ca1e80fa71877dde95bc1f73}{
+void {\bfseries \-Line\-Following} (void)}
+\label{mouse_8h_a1f745785ca1e80fa71877dde95bc1f73}
+
+\item 
+\hypertarget{mouse_8h_aae4f1069349d1168a46ffea974e4d477}{
+void {\bfseries \-Debug} (void)}
+\label{mouse_8h_aae4f1069349d1168a46ffea974e4d477}
+
+\item 
+\hypertarget{mouse_8h_a4f039a8e8c0945d459d7c050723eddac}{
+void {\bfseries \-Test} (void)}
+\label{mouse_8h_a4f039a8e8c0945d459d7c050723eddac}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Functions for motors}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a93e11e781f4e90b648db2943f881435e}{
+void {\bfseries \-Control\-Motor} (\-Motor motor, \-Motor\-Action action)}
+\label{mouse_8h_a93e11e781f4e90b648db2943f881435e}
+
+\item 
+\hypertarget{mouse_8h_a698b1e10ea801ae95c36cb291dbed2c3}{
+void {\bfseries \-Control\-Speed} (void)}
+\label{mouse_8h_a698b1e10ea801ae95c36cb291dbed2c3}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Interrupt service routines (\-I\-S\-Rs)}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a646c974cb948e6bedc97b9d78945cec8}{
+interrupt \*
+\-Vector\-Number\-\_\-\-Vkeyboard1 void {\bfseries int\-S\-W3\-\_\-4} (void)}
+\label{mouse_8h_a646c974cb948e6bedc97b9d78945cec8}
+
+\item 
+\hypertarget{mouse_8h_af49c8cde4e2cdab6a621e2b0f71a912a}{
+interrupt \*
+\-Vector\-Number\-\_\-\-Vtpm1ovf void {\bfseries int\-T\-P\-M1\-O\-V\-F} (void)}
+\label{mouse_8h_af49c8cde4e2cdab6a621e2b0f71a912a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Funcion for serial communicaiton through \-S\-C\-I}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a2503bf56b266c62b76b28f91a8eed040}{
+void {\bfseries \-S\-C\-I\-Setup} (void)}
+\label{mouse_8h_a2503bf56b266c62b76b28f91a8eed040}
+
+\item 
+\hypertarget{mouse_8h_add14fd70c71d75c0740a20b842dd1921}{
+byte {\bfseries \-S\-C\-I\-Receive\-Char} (void)}
+\label{mouse_8h_add14fd70c71d75c0740a20b842dd1921}
+
+\item 
+\hypertarget{mouse_8h_a694401751a1ac818be03d5741d366975}{
+void {\bfseries \-S\-C\-I\-Send\-Char} (char ch)}
+\label{mouse_8h_a694401751a1ac818be03d5741d366975}
+
+\item 
+\hypertarget{mouse_8h_ab09793a7a750e1221188a526851b6fd1}{
+byte {\bfseries \-S\-C\-I\-Get\-Char} (void)}
+\label{mouse_8h_ab09793a7a750e1221188a526851b6fd1}
+
+\item 
+\hypertarget{mouse_8h_a00f7a15189e8421b9cac5140488bba31}{
+void {\bfseries \-S\-C\-I\-Send\-Str} (char $\ast$str)}
+\label{mouse_8h_a00f7a15189e8421b9cac5140488bba31}
+
+\item 
+\hypertarget{mouse_8h_aeec93af7d9e72e761eb4893fb6c21b18}{
+void {\bfseries \-S\-C\-I\-Display\-Prompt} (void)}
+\label{mouse_8h_aeec93af7d9e72e761eb4893fb6c21b18}
+
+\item 
+\hypertarget{mouse_8h_a32da991115ad5e8367c27047672c3c83}{
+void {\bfseries \-S\-C\-I\-Display\-Bit\-String} (char ch)}
+\label{mouse_8h_a32da991115ad5e8367c27047672c3c83}
+
+\item 
+\hypertarget{mouse_8h_ae280a1943a7307d0bc48d5764971a0b8}{
+void {\bfseries \-S\-C\-I\-Send\-New\-Line} (void)}
+\label{mouse_8h_ae280a1943a7307d0bc48d5764971a0b8}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Misc. functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_a83da1617930ffda7c997b42aec4680fc}{
+byte {\bfseries \-Bit\-Set} (byte \-Bit\-\_\-position, byte \-Var\-\_\-old)}
+\label{mouse_8h_a83da1617930ffda7c997b42aec4680fc}
+
+\item 
+\hypertarget{mouse_8h_a4725f6c66b6d97b186545599807ded06}{
+byte {\bfseries \-Bit\-Clear} (byte \-Bit\-\_\-position, byte \-Var\-\_\-old)}
+\label{mouse_8h_a4725f6c66b6d97b186545599807ded06}
+
+\item 
+\hypertarget{mouse_8h_acbdea21ceb134901834fa2159d9aaa9f}{
+void {\bfseries \-Delay} (int)}
+\label{mouse_8h_acbdea21ceb134901834fa2159d9aaa9f}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}{
+\-E\-X\-T\-E\-R\-N \-Mouse\-Mode \hyperlink{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}{mouse\-Mode}}
+\label{mouse_8h_acfb8a27441813e09cbe63a7057b3b799}
+
+\begin{DoxyCompactList}\small\item\em operation mode of mouse \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a0a1088091d78a9bb873c762768082372}{
+\-E\-X\-T\-E\-R\-N \-Mouse\-Status \hyperlink{mouse_8h_a0a1088091d78a9bb873c762768082372}{mouse\-Status}}
+\label{mouse_8h_a0a1088091d78a9bb873c762768082372}
+
+\begin{DoxyCompactList}\small\item\em status of mouse \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}{
+\-E\-X\-T\-E\-R\-N \-Motor\-Status \hyperlink{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}{left\-Motor}}
+\label{mouse_8h_aeaf7e05849fbfff566eef7f4cede39fc}
+
+\begin{DoxyCompactList}\small\item\em status of left motor \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_afe88a6396fd833a44020ac1a6732db83}{
+\-E\-X\-T\-E\-R\-N \-Motor\-Status \hyperlink{mouse_8h_afe88a6396fd833a44020ac1a6732db83}{right\-Motor}}
+\label{mouse_8h_afe88a6396fd833a44020ac1a6732db83}
+
+\begin{DoxyCompactList}\small\item\em status of right motor \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a2f9f40e514cc3123c5e000c196bb16d6}{
+\-E\-X\-T\-E\-R\-N word \hyperlink{mouse_8h_a2f9f40e514cc3123c5e000c196bb16d6}{diff\-Left}}
+\label{mouse_8h_a2f9f40e514cc3123c5e000c196bb16d6}
+
+\begin{DoxyCompactList}\small\item\em difference between two consecutive counter values for left motor \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a0544dc30c2a809f2fe2eba9255dea62a}{
+\-E\-X\-T\-E\-R\-N word \hyperlink{mouse_8h_a0544dc30c2a809f2fe2eba9255dea62a}{diff\-Right}}
+\label{mouse_8h_a0544dc30c2a809f2fe2eba9255dea62a}
+
+\begin{DoxyCompactList}\small\item\em difference between two consecutive counter values for right motor \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a012f82e3b1e52cbd245377fd9e5e82ec}{
+\-E\-X\-T\-E\-R\-N int \hyperlink{mouse_8h_a012f82e3b1e52cbd245377fd9e5e82ec}{travel\-Distance}}
+\label{mouse_8h_a012f82e3b1e52cbd245377fd9e5e82ec}
+
+\begin{DoxyCompactList}\small\item\em distance to travel; one unit is approximately 0.\-5 mm \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_ac4246ba02c8bfee210688785a3537302}{
+\-E\-X\-T\-E\-R\-N int \hyperlink{mouse_8h_ac4246ba02c8bfee210688785a3537302}{scale\-Factor}}
+\label{mouse_8h_ac4246ba02c8bfee210688785a3537302}
+
+\begin{DoxyCompactList}\small\item\em scale factor used in motor speed control \end{DoxyCompactList}\item 
+\hypertarget{mouse_8h_a4dd14cf3a6f5bd9304fcd09f02af7a2c}{
+\-E\-X\-T\-E\-R\-N int {\bfseries nom\-Speed}}
+\label{mouse_8h_a4dd14cf3a6f5bd9304fcd09f02af7a2c}
+
+\item 
+\hypertarget{mouse_8h_a6d17101ec213c83c2f492889ae503dbb}{
+\-E\-X\-T\-E\-R\-N word {\bfseries pw\-Left}}
+\label{mouse_8h_a6d17101ec213c83c2f492889ae503dbb}
+
+\item 
+\hypertarget{mouse_8h_a226fb5a4f4a0b32eb2332a63a5457850}{
+\-E\-X\-T\-E\-R\-N word {\bfseries pw\-Right}}
+\label{mouse_8h_a226fb5a4f4a0b32eb2332a63a5457850}
+
+\item 
+\hypertarget{mouse_8h_acaaa988fab9ed600d71b0887bc14f5da}{
+\-E\-X\-T\-E\-R\-N word {\bfseries pw\-Max}}
+\label{mouse_8h_acaaa988fab9ed600d71b0887bc14f5da}
+
+\item 
+\hypertarget{mouse_8h_ae84f32c3e5786afa05774e3a2d6b98f9}{
+\-E\-X\-T\-E\-R\-N word {\bfseries pw\-Min}}
+\label{mouse_8h_ae84f32c3e5786afa05774e3a2d6b98f9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Declares system-\/wide types, macros, variables, and functions for the micro mouse program. \begin{DoxyAuthor}{\-Author}
+\-Kyeong \-Soo (\-Joseph) \-Kim $<$\href{mailto:k.s.kim@swansea.ac.uk}{\tt k.\-s.\-kim@swansea.\-ac.\-uk}$>$ 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+2012-\/02-\/21
+\end{DoxyDate}
+\begin{DoxyRemark}{\-Remarks}
+\-This program is based on \-Dr \-Tim \-Davies' assembly version of micro mouse program and the \-C port of it by \-Mr \-Gareth \-Evans.
+\end{DoxyRemark}
+\begin{DoxyCopyright}{\-Copyright}
+\-Copyright (\-C) 2012 \-Swansea \-University. \-All rights reserved.
+
+\-This software is written and distributed under the \-G\-N\-U \-General \-Public \-License \-Version 2 (\href{http://www.gnu.org/licenses/gpl-2.0.html}{\tt http\-://www.\-gnu.\-org/licenses/gpl-\/2.\-0.\-html}). \-You must not remove this notice, or any other, from this software. 
+\end{DoxyCopyright}
+
+
+\subsection{\-Define \-Documentation}
+\hypertarget{mouse_8h_a7934586edf32fa177c8e5ed88de45656}{
+\index{mouse.\-h@{mouse.\-h}!bus\-Clock@{bus\-Clock}}
+\index{bus\-Clock@{bus\-Clock}!mouse.h@{mouse.\-h}}
+\subsubsection[{bus\-Clock}]{\setlength{\rightskip}{0pt plus 5cm}\#define bus\-Clock~2}}
+\label{mouse_8h_a7934586edf32fa177c8e5ed88de45656}
+
+
+\-System specific. 
+
+system bus clock in \-M\-Hz; one half of the \-C\-P\-U clock frequency (4 \-M\-Hz) 
