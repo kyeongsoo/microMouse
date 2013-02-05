@@ -172,7 +172,7 @@ void main(void)
     diffLeft = 0;           // difference between two consecutive counter values for left motor
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
-    scaleFactor = 2;        // scale factor used in motor speed control    
+    scaleFactor = 200;      // scale factor used in motor speed control    
     nomSpeed = 0x2000;      // nominal speed
     pwLeft = defaultSpeed;  // PWM duty cycle for left motor
     pwRight = defaultSpeed; // PWM duty cycle for right motor

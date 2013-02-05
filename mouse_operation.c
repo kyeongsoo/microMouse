@@ -35,7 +35,6 @@ void AvoidObstacle()
             if (!infraredFrontLeft && !infraredFrontRight) {
                 // neither is touched (i.e., both the values are zero)
                 // then, back to the loop
-                break;
             }
             else if (infraredFrontLeft) {
                 // left sensor detects; avoid left obstacle
