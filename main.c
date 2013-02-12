@@ -179,17 +179,6 @@ void main(void)
     pwMax = 50;             // maximum for PWM duty cycle
     pwMin = 10;             // minimum for PWM duty cycle
 
-/*
-    // for KBI handling
-    PTDPE = 0xFF;   // enable port D pullups for push button switch
-    PTDDD = 0x00;   // set port D as input; switches 3 and 4 are connected to port D3 and D2, respectively
-    KBI1SC = BitClear(1, KBI1SC);   // KBIE=0; disable KBI
-    KBI1PE = 0x60;                  // enable KBI function for pins 5 and 6 only
-    KBI1SC = BitClear(0, KBI1SC);   // KBIMOD=0; select edge-only detection
-    KBI1SC = BitSet(2, KBI1SC);     // KBACK=1; clear KBI flag
-    KBI1SC = BitSet(1, KBI1SC);     // KBIE=1; enable KBI
-*/
-
     // for ADC
     ADC1CFG = 0b00000000;   // on bus clock, 8-bit conversion
     APCTL1 = 0b11111111;    // use all 8 pins of port B for ADC
@@ -198,90 +187,45 @@ void main(void)
     leftMotor = MOTOR_STATUS_STOP;
     rightMotor = MOTOR_STATUS_STOP;
 
-/*
+    // now we are ready to go!
+    EnableInterrupts;
+
     //
-    // Now we are going to set the mouse operation mode according to rocker switches 1 & 2 as follows:
-    // --------------------------------------------------------------
-    // SW1    | SW2    | Operation Mode               | LED8* | LED9*
-    // --------------------------------------------------------------
-    // Open** | Open   | MOUSE_MODE_OBSTACLE_AVOIDING | ON    | ON
-    // Open   | Closed | MOUSE_MODE_LINE_FOLLOWING    | ON    | OFF
-    // Closed | Open   | MOUSE_MODE_COMBAT            | OFF   | ON
-    // Closed | Closed | MOUSE_MODE_DEBUG             | OFF   | OFF
-    // --------------------------------------------------------------
-    // *  We assume that PTC2 and PTC6 are connected to LED8 and LED9, respectively.
-    // ** These switches are active low and input a logic high when set to the open position.
+    // Now we set the mouse operation mode based on the status of two front
+    // touch bars -- at the moment of turning it on -- as follows:
     //
-    PTAPE = 0xFF;   // enable port A pullups for push button switch
-    PTADD = 0x00;   // set port A as input; switches 1 and 2 are connected to port A0 and A1, respectively
-    
-    sw1 = PTAD_PTAD0;  // read switch configuration
-    sw2 = PTAD_PTAD1;  // read switch configuration
+    // ---------------------------------------------------------------------
+    // touchBarFrontLeft | touchBarFrontRight | Operation Mode
+    // ---------------------------------------------------------------------
+    // not touched       | not touched        | MOUSE_MODE_DEBUG (DEFAULT)
+    // not touched       | touched            | MOUSE_MODE_COMBAT
+    // touched           | not touched        | MOUSE_MODE_LINE_FOLLOWING
+    // touched           | touched            | MOUSE_MODE_OBSTACLE_AVOIDING
+    // ---------------------------------------------------------------------
+    //
 
-    PTCDD = 0xFF;   // set port C as output    
-    PTCD =  0xFF;   // turn off LEDs
+    PTAPE = 0xFF;   // enable port A pullups for touchbar switches and infrared sensors
+    PTADD = 0x00;   // set port A as input
 
-    // simple FSM for motor status handling
-    if (sw1 == 1) {
-        if (sw2 == 1) {
-            mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
-            PTCD_PTCD2 = 1;
-            PTCD_PTCD6 = 1;
-            AvoidObstacle();
-        }
-        else {
-            mouseMode = MOUSE_MODE_LINE_FOLLOWING;
-            PTCD_PTCD2 = 1;
-            PTCD_PTCD6 = 0;
-            LineFollowing();
-        }
+    tbfl = touchBarFrontLeft;
+    tbfr = touchBarFrontRight;
+    if ((tbfl == 0) && (tbfr == 0)) {
+        mouseMode = MOUSE_MODE_DEBUG;
+        Debug();
     }
-    else {
-        if (sw2 == 1) {
-            mouseMode = MOUSE_MODE_COMBAT;
-            PTCD_PTCD2 = 0;
-            PTCD_PTCD6 = 1;
-        }
-        else {
-            mouseMode = MOUSE_MODE_DEBUG;
-            // reserved for another mode in the future
-            PTCD_PTCD2 = 0;
-            PTCD_PTCD6 = 0;
-            Debug();
-        }
+    else if ((tbfl == 0) && (tbfr == 1)) {
+        mouseMode = MOUSE_MODE_COMBAT;
+        Combat();
     }
-*/
-
-    PTAPE = 0xFF;   // enable port A pullups for push button switch
-    PTADD = 0x00;   // set port A as input; switches 1 and 2 are connected to port A0 and A1, respectively
-
-	//----------------------------------------------------------------------------------
-	// Note that we temporarily comment out the following for testing the sample program
-    //----------------------------------------------------------------------------------
-	// tbfl = touchBarFrontLeft;
-    // tbfr = touchBarFrontRight;
-    // tbrl = touchBarRearLeft;
-    // tbrr = touchBarRearRight;
-	//----------------------------------------------------------------------------------
-	// Then, set the following to enter a test mode for testing component functions
-	//----------------------------------------------------------------------------------
-	tbfl = 0;
-    
-    if ((tbfl == 1) && (tbfr == 1)) {
-        mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
-        AvoidObstacle();
-    }
-    else if ((tbrl == 1) && (tbrr == 1)) {
+    else if ((tbrl == 1) && (tbrr == 0)) {
         mouseMode = MOUSE_MODE_LINE_FOLLOWING;
         LineFollowing();
     }
     else {
-		Test();
-        // Debug();
+        mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+        AvoidObstacle();
     }
 
-    // now we are ready to go!
-    EnableInterrupts;
     for (;;) {
         // do nothing; just waiting for interrupts
     }

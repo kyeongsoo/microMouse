@@ -128,6 +128,12 @@ void LineFollowing ()
 }
 
 
+void Combat()
+{
+    // fill your code here for the combat mode    
+}
+
+
 // debug mode with simple command-line interface
 void Debug()
 {
