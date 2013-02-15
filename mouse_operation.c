@@ -36,11 +36,11 @@ void AvoidObstacle()
                 // neither is touched (i.e., both the values are zero)
                 // then, back to the loop
             }
-            else if (infraredFrontLeft) {
+            else if (infraredFrontLeft && !infraredFrontRight) {
                 // left sensor detects; avoid left obstacle
 
             }
-            else if (infraredFrontRight) {
+            else if (!infraredFrontLeft && infraredFrontRight) {
                 // right sensor detects; avoid right obstacle
 
             }
@@ -51,13 +51,13 @@ void AvoidObstacle()
                 ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
             }
         }
-        else if (touchBarFrontLeft) {
+        else if (touchBarFrontLeft && !touchBarFrontRight) {
             // left bar is touched; avoid left obstacle
             ControlMouse(MOUSE_ACTION_STOP);
             ControlMouse(MOUSE_ACTION_REVERSE);
             ControlMouse(MOUSE_ACTION_TURNRIGHT);
         }
-        else if (touchBarFrontRight) {
+        else if (!touchBarFrontLeft && touchBarFrontRight) {
             // right bar is touched; avoid right obstacle
             ControlMouse(MOUSE_ACTION_STOP);
             ControlMouse(MOUSE_ACTION_REVERSE);
