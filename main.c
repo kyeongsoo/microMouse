@@ -172,11 +172,11 @@ void main(void)
     diffLeft = 0;           // difference between two consecutive counter values for left motor
     diffRight = 0;          // difference between two consecutive counter values for right motor
     travelDistance = 0;     // distance to travel; one unit is approximately 05 mm
-    scaleFactor = 200;      // scale factor used in motor speed control    
+    scaleFactor = 200;      // scale factor used in motor speed control
     nomSpeed = 0x2000;      // nominal speed
     pwLeft = defaultSpeed;  // PWM duty cycle for left motor
     pwRight = defaultSpeed; // PWM duty cycle for right motor
-    pwMax = 50;             // maximum for PWM duty cycle
+    pwMax = 90;             // maximum for PWM duty cycle
     pwMin = 10;             // minimum for PWM duty cycle
 
     // for ADC
@@ -207,11 +207,15 @@ void main(void)
     PTAPE = 0xFF;   // enable port A pullups for touchbar switches and infrared sensors
     PTADD = 0x00;   // set port A as input
 
+/*
     tbfl = touchBarFrontLeft;
     tbfr = touchBarFrontRight;
+    */
+    tbfl = 0;
+    tbfr = 0;
     if ((tbfl == 0) && (tbfr == 0)) {
         mouseMode = MOUSE_MODE_DEBUG;
-        Debug();
+        Test();
     }
     else if ((tbfl == 0) && (tbfr == 1)) {
         mouseMode = MOUSE_MODE_COMBAT;

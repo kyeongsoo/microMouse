@@ -236,6 +236,9 @@ void Test()
   while (1) {
     ControlMouse(MOUSE_ACTION_FORWARD);
     Delay(opDelay);
+  /*
+    ControlMouse(MOUSE_ACTION_FORWARD);
+    Delay(opDelay);
     ControlMouse(MOUSE_ACTION_REVERSE);
     Delay(opDelay);
     ControlMouse(MOUSE_ACTION_TURNLEFT);
@@ -246,6 +249,16 @@ void Test()
     Delay(opDelay);
     ControlMouse(MOUSE_ACTION_STOP);
     Delay(opDelay);
-
+    */
   }
+}
+
+
+// ADC test mode for line following sensors
+void ADCTest()
+{
+    while (1)
+    {
+        ADCRead();
+    }
 }

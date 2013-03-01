@@ -67,16 +67,9 @@ interrupt VectorNumber_Vtpm2ovf void intTPM2OVF()
     // clear TPM2 timer overflow flag    
     tmp = TPM2SC_TOF;   // first, need to read from TPM2 timer overflow flag
     TPM2SC_TOF = 0;     // then, clear TPM2 timer overflow flag
-
-/*  
-    // DEBUG
-    PTED_PTED0 = PTED_PTED0 ^ 1;
-    PTED_PTED1 = PTED_PTED1 ^ 1;
-*/
-    
+  
     if ((leftMotor != MOTOR_STATUS_STOP) && (rightMotor != MOTOR_STATUS_STOP)) {
-        // balance the speeds of motors when both motors are moving
-        ControlSpeed();
+        ControlSpeed();	// balance the speeds of motors when both are moving
     }
 }
 
@@ -95,8 +88,7 @@ interrupt VectorNumber_Vtpm2ch0 void intTPM2CH0()
     oldLeft = TPM2C0V;
     
     if (travelDistance > 0) {
-        // check travelDistance variable and decrement if it is greater than zero
-        travelDistance--;
+        travelDistance--;	// check travelDistance and decrement if it is greater than zero
     }
 }
 

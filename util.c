@@ -41,7 +41,7 @@ byte BitClear(byte Bit_position, byte Var_old)
 
 
 //--------------------------------------------------------
-// Misc. functions
+// Functions for delay
 //--------------------------------------------------------
 void Delay(int a)
 {
@@ -49,4 +49,20 @@ void Delay(int a)
     for (b=0;b<a;b++){
         for(c=0;c<100;c++);
     }
+}
+
+
+//------------------------------------------------------------------------------
+// Functions for ADC module (e.g., for read values from line sensors)
+//------------------------------------------------------------------------------
+void ADCRead(void)
+{
+    word value;
+    
+    ADC1SC1 = 0b00000000;   // read from PTB0; change it for your own configuration
+    
+    while (ADC1SC1_COCO != 1)
+    {   // wait until ADC conversion is completed   
+    }
+    value = ADC1R;  // 10-bit data from the ADC
 }

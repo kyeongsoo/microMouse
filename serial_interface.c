@@ -27,10 +27,10 @@ void SCISetup()
     SCI2C2 = 0b00001100;    // Turn on TX (TE=1) and RX (RE=1) with polling
 
 /*
-// SCI1BD = 0x000D; // 9600 baud with the bus clock of 2 MHz
-SCI1BDH = 0x00
-SCI1BDL = 0x1A; // 9600 baud with the bus clock of 4 MHz (of AW60 demo board)
-SCI1C2 = 0b00001100;    // turn on TX/RX with polling
+// SCI2BD = 0x000D; // 9600 baud with the bus clock of 2 MHz
+SCI2BDH = 0x00
+SCI2BDL = 0x1A; // 9600 baud with the bus clock of 4 MHz (of AW60 demo board)
+SCI2C2 = 0b00001100;    // turn on TX/RX with polling
 */
 }
 
@@ -40,11 +40,11 @@ byte SCIReceiveChar()
 {
     byte ch;
   
-    while (SCI1S1_RDRF != 1) {
+    while (SCI2S1_RDRF != 1) {
         // wait for data
     }
-    ch = SCI1S1;  // clear the RDRF flag
-    ch = SCI1D;   // read the character
+    ch = SCI2S1;  // clear the RDRF flag
+    ch = SCI2D;   // read the character
     return ch;
 }
 
@@ -52,10 +52,10 @@ byte SCIReceiveChar()
 // send a character to SCI port
 void SCISendChar(char ch)
 {
-    while (SCI1S1_TDRE != 1){
+    while (SCI2S1_TDRE != 1){
         // wait for output buffer empty
     }
-    SCI1D = ch;   // send the character
+    SCI2D = ch;   // send the character
 }
 
 

@@ -118,7 +118,8 @@ typedef enum {
 #define HIGH_WORD       0xFFFF
 #define pwmPeriod       10  ///< period of PWM signal in ms
 #define controlPeriod   50  ///< period of motor speed control in ms
-#define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
+//#define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
+#define defaultSpeed    33  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)
 //@}
 
 
