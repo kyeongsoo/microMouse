@@ -55,14 +55,15 @@ void Delay(int a)
 //------------------------------------------------------------------------------
 // Functions for ADC module (e.g., for read values from line sensors)
 //------------------------------------------------------------------------------
-void ADCRead(void)
+byte ADCRead(byte ch)
 {
     word value;
     
-    ADC1SC1 = 0b00000000;   // read from PTB0; change it for your own configuration
+    ADC1SC1 = ch;
     
     while (ADC1SC1_COCO != 1)
     {   // wait until ADC conversion is completed   
     }
-    value = ADC1R;  // 10-bit data from the ADC
+
+    return ADC1RL;  // lower 8-bit value out of 10-bit data from the ADC
 }

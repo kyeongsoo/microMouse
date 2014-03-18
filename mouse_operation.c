@@ -75,6 +75,35 @@ void AvoidObstacle()
 
 void LineFollowing ()
 {
+    byte fl, fr, rl, rr;
+    byte flMax, frMax, rlMax, rr Max;
+    byte flMin, frMin, rlMin, rrMin;
+    byte flTH, frTH, rlTH, rrTH;
+    byte tmp;
+    
+    // set optimal threshold values for sensors
+
+    // first, record values from black surface
+    //  once you place your mouse on black surface, hit the front left touch bar
+    while (touchBarFontLeft == 0)
+    {
+    }
+    flMax = ADCRead(0x01);
+    frMax = ADCRead(0x00);
+    rlMax = ADCRead(0x03);
+    rrMax = ADCRead(0x02);
+
+    // then you place your mouse on white surface, hit the front left touch bar
+    while (touchBarFontLeft == 0)
+    {
+    }
+    flMin = ADCRead(0x01);
+    frMin = ADCRead(0x00);
+    rlMin = ADCRead(0x03);
+    rrMin = ADCRead(0x02);
+    
+    
+
     mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
 
     for (;;) {
