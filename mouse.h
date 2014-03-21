@@ -47,6 +47,7 @@ typedef enum {
 typedef enum {
     MOUSE_STATUS_FORWARD,
     MOUSE_STATUS_REVERSE,
+    MOUSE_STATUS_BRAKE,
     MOUSE_STATUS_STOP,
     MOUSE_STATUS_TURNLEFT,
     MOUSE_STATUS_TURNRIGHT,
@@ -56,6 +57,7 @@ typedef enum {
 typedef enum {
     MOUSE_ACTION_FORWARD,
     MOUSE_ACTION_REVERSE,
+    MOUSE_ACTION_BRAKE,
     MOUSE_ACTION_STOP,
     MOUSE_ACTION_TURNLEFT,
     MOUSE_ACTION_TURNRIGHT,
@@ -70,12 +72,14 @@ typedef enum {
 typedef enum {
     MOTOR_STATUS_FORWARD,
     MOTOR_STATUS_REVERSE,
+    MOTOR_STATUS_BRAKE,
     MOTOR_STATUS_STOP
 } MotorStatus;
 
 typedef enum {
     MOTOR_ACTION_FORWARD,
     MOTOR_ACTION_REVERSE,
+    MOTOR_ACTION_BRAKE,
     MOTOR_ACTION_STOP
 } MotorAction;
 
@@ -116,6 +120,7 @@ typedef enum {
 #define s1  0x1388
 #define s2  0x2222
 #define HIGH_WORD       0xFFFF
+#define LOW_WORD        0x0000
 #define pwmPeriod       10  ///< period of PWM signal in ms
 #define controlPeriod   50  ///< period of motor speed control in ms
 //#define defaultSpeed    25  ///< default speed in terms of percentage duty cycle (e.g., 100% for full speed)

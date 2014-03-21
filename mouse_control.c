@@ -44,6 +44,17 @@ void ControlMouse(MouseAction action)
             mouseStatus = MOUSE_STATUS_REVERSE;
         }
         break;
+    case MOUSE_ACTION_BRAKE:
+        if (leftMotor != MOTOR_STATUS_BRAKE) {
+            ControlMotor(MOTOR_LEFT, MOTOR_ACTION_BRAKE);
+        }
+        if (rightMotor != MOTOR_STATUS_BRAKE) {
+            ControlMotor(MOTOR_RIGHT, MOTOR_ACTION_BRAKE);
+        }
+        if (mouseStatus != MOUSE_STATUS_BRAKE) {
+            mouseStatus = MOUSE_STATUS_BRAKE;
+        }
+        break;
     case MOUSE_ACTION_STOP:
         if (leftMotor != MOTOR_STATUS_STOP) {
             ControlMotor(MOTOR_LEFT, MOTOR_ACTION_STOP);

@@ -80,11 +80,12 @@ void LineFollowing ()
     byte flMin, frMin, rlMin, rrMin;
     byte flTH, frTH, rlTH, rrTH;
     byte tmp;
-    
-    // set optimal threshold values for sensors
+
+    mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+    ControlMouse(MOUSE_ACTION_STOP);
 
     // first, record values from black surface
-    //  once you place your mouse on black surface, hit the front left touch bar
+    // once you place your mouse on black surface, hit the front left touch bar
     while (touchBarFontLeft == 0)
     {
     }
@@ -92,6 +93,9 @@ void LineFollowing ()
     frMax = ADCRead(0x00);
     rlMax = ADCRead(0x03);
     rrMax = ADCRead(0x02);
+    ControlMouse(MOUSE_ACTION_FORWARD); // to indicate it's done
+    Delay(500);
+    ControlMouse(MOUSE_ACTION_STOP);
 
     // then you place your mouse on white surface, hit the front left touch bar
     while (touchBarFontLeft == 0)
@@ -101,58 +105,39 @@ void LineFollowing ()
     frMin = ADCRead(0x00);
     rlMin = ADCRead(0x03);
     rrMin = ADCRead(0x02);
+    ControlMouse(MOUSE_ACTION_FORWARD); // to indicate it's done
+    Delay(500);
+    ControlMouse(MOUSE_ACTION_STOP);
     
-    
-
-    mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+    // finally, set optimal thresholds for sensors
+    flTH = (byte)(flMax/2.0 + flMin/2.0);
+    frTH = (byte)(frMax/2.0 + frMin/2.0);
+    rlTH = (byte)(rlMax/2.0 + rlMin/2.0);
+    rrTH = (byte)(rrMax/2.0 + rrMin/2.0);
 
     for (;;) {
         // first move forward
         ControlMouse(MOUSE_ACTION_FORWARD);
 
-        // first, check the status of touch bars
-        if (!touchBarFrontLeft && !touchBarFrontRight) {
-            // neither is touched (i.e., both the values are zero)
+        // update the status of each sensor
+        tmp = ADCRead(0x01);
+        fl = tmp < flTH ? 0 : 1;
+        tmp = ADCRead(0x00);
+        fr = tmp < frTH ? 0 : 1;
+        tmp = ADCRead(0x03);
+        rl = tmp < rlTH ? 0 : 1;
+        tmp = ADCRead(0x02);
+        rr = tmp < rrTH ? 0 : 1;
 
-            // then check the status of IF sensors
-            if (!infraredFrontLeft && !infraredFrontRight) {
-                // neither is touched (i.e., both the values are zero)
-                // then, back to the loop
-                break;
-            }
-            else if (infraredFrontLeft) {
-                // left sensor detects; avoid left obstacle
-
-            }
-            else if (infraredFrontRight) {
-                // right sensor detects; avoid right obstacle
-
-            }
-            else {
-                // both sensors detect; avoid front obstacle
-                ControlMouse(MOUSE_ACTION_STOP);
-                ControlMouse(MOUSE_ACTION_REVERSE);
-                ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
-            }
+        if (fl == 1 && fr == 1 && rl == 1 && rr == 1) {
+            // the mouse is on track (i.e., following the line correctly)
+            ControlMouse(MOUSE_ACTION_FORWARD);
+            Delay(500);
         }
-        else if (touchBarFrontLeft) {
-            // left bar is touched; avoid left obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNRIGHT);
+        /* the rest of logical branches to be completed by each of you
+        else if () {
         }
-        else if (touchBarFrontRight) {
-            // right bar is touched; avoid right obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNLEFT);
-        }
-        else {
-            // both bars are touched; avoid front obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
-        }
+        */
     } // end of for() loop
 }
 

@@ -43,6 +43,11 @@ void ControlMotor(Motor motor, MotorAction action)
         tpm2 = pwm;
         status = MOTOR_STATUS_REVERSE;
         break;
+    case MOTOR_ACTION_BRAKE:
+        tpm1 = LOW_WORD;
+        tpm2 = LOW_WORD;
+        status = MOTOR_STATUS_BRAKE;
+        break;
     case MOTOR_ACTION_STOP:
         tpm1 = HIGH_WORD;
         tpm2 = HIGH_WORD;
