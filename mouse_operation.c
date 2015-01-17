@@ -76,7 +76,7 @@ void AvoidObstacle()
 void LineFollowing ()
 {
     byte fl, fr, rl, rr;
-    byte flMax, frMax, rlMax, rr Max;
+    byte flMax, frMax, rlMax, rrMax;
     byte flMin, frMin, rlMin, rrMin;
     byte flTH, frTH, rlTH, rrTH;
     byte tmp;
@@ -86,7 +86,7 @@ void LineFollowing ()
 
     // first, record values from black surface
     // once you place your mouse on black surface, hit the front left touch bar
-    while (touchBarFontLeft == 0)
+    while (touchBarFrontLeft == 0)
     {
     }
     flMax = ADCRead(0x01);
@@ -98,7 +98,7 @@ void LineFollowing ()
     ControlMouse(MOUSE_ACTION_STOP);
 
     // then you place your mouse on white surface, hit the front left touch bar
-    while (touchBarFontLeft == 0)
+    while (touchBarFrontLeft == 0)
     {
     }
     flMin = ADCRead(0x01);
